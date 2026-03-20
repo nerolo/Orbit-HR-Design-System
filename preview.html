@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🟠 Orbit Design System — Foundation Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --font: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --theme-lipstick-berry: #B60058;
+    --theme-coral-blush: #F1528B;
+    --theme-peach-dream: #FFB3BC;
+    --theme-nude-rose: #F8E9ED;
+    --theme-midnight-charcoal: #2D2A2B;
+    --theme-graphite-glam: #625F64;
+    --theme-latte: #EFEBE7;
+    --theme-soft-cream: #F4F2F1;
+    --theme-pearl-white: #F8F8F8;
+  }
+  body { font-family: var(--font); background: #fff; color: #2D2A2B; display: flex; min-height: 100vh; }
+  .sidebar { width: 260px; background: #F4F2F1; padding: 28px 20px; border-right: 1px solid #EFEBE7; flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+  .sidebar h2 { font-size: 14px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #B60058; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .sidebar .nav-section { margin-bottom: 16px; }
+  .sidebar .nav-section h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #625F64; margin-bottom: 6px; padding-left: 8px; }
+  .sidebar a { display: block; padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 500; color: #2D2A2B; transition: background .15s; }
+  .sidebar a:hover, .sidebar a.active { background: #FFB3BC33; color: #B60058; font-weight: 600; }
+  .main { flex: 1; padding: 48px 56px; max-width: 1100px; }
+  .header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 2px solid #F4F2F1; }
+  .header .badge { font-size: 13px; font-weight: 600; color: #B60058; letter-spacing: .08em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  h1 { font-size: 36px; font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+  .subtitle { font-size: 16px; color: #625F64; max-width: 640px; line-height: 1.7; }
+  .subtitle strong { color: #2D2A2B; }
+  .tier-flow { display: flex; gap: 16px; margin-bottom: 48px; flex-wrap: wrap; align-items: center; }
+  .tier-flow .pill { display: flex; align-items: center; gap: 8px; }
+  .tier-flow .num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; color: #fff; font-size: 12px; font-weight: 800; }
+  .tier-flow .arrow { font-size: 16px; color: #B60058; }
+  .tier { margin-bottom: 56px; }
+  .tier-header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+  .tier-header .num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; color: #fff; font-size: 13px; font-weight: 800; }
+  .tier-header h2 { font-size: 20px; font-weight: 700; }
+  .tier-desc { font-size: 14px; color: #625F64; line-height: 1.6; margin-bottom: 24px; padding-left: 40px; }
+  .tier-content { padding-left: 40px; }
+  .group { margin-bottom: 40px; }
+  .group h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .group .gdesc { font-size: 13px; color: #625F64; line-height: 1.6; margin-bottom: 16px; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 16px; }
+  .swatch { width: 160px; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.10); }
+  .swatch .block { height: 100px; display: flex; flex-direction: column; justify-content: flex-end; padding: 8px 12px; }
+  .swatch .block span { font-size: 11px; font-weight: 600; opacity: .85; letter-spacing: .04em; text-transform: uppercase; }
+  .swatch .meta { background: #fff; padding: 10px 12px; border-top: 1px solid #f0f0f0; }
+  .swatch .hex { font-size: 12px; font-weight: 600; color: #2D2A2B; }
+  .swatch .token { font-family: monospace; font-size: 10px; color: #625F64; margin-top: 2px; word-break: break-all; }
+  .swatch .alias { font-family: monospace; font-size: 9px; color: #B60058; opacity: .7; margin-top: 2px; }
+  .usage-box { background: #FCF3F7; border: 1px solid #FFB3BC; border-radius: 12px; padding: 20px 24px; margin-top: 8px; }
+  .usage-box h3 { font-size: 14px; font-weight: 700; color: #B60058; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+  .usage-box code { font-family: monospace; font-size: 13px; color: #2D2A2B; line-height: 1.8; display: block; }
+  /* Typography page */
+  .type-table { width: 100%; }
+  .type-table .thead { display: grid; grid-template-columns: 110px 1fr 200px; gap: 24px; padding-bottom: 8px; border-bottom: 2px solid #2D2A2B; }
+  .type-table .thead span { font-size: 11px; font-weight: 700; color: #625F64; text-transform: uppercase; letter-spacing: .08em; }
+  .type-row { display: grid; grid-template-columns: 110px 1fr 200px; align-items: center; gap: 24px; padding: 20px 0; border-bottom: 1px solid #F4F2F1; }
+  .type-row .tname { font-family: monospace; font-size: 12px; font-weight: 600; color: #B60058; }
+  .type-row .tinfo { font-family: monospace; font-size: 10px; color: #625F64; margin-top: 2px; }
+  .type-row .specimen { font-weight: 400; color: #2D2A2B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .type-row .usage { font-size: 12px; color: #625F64; }
+  .weight-table .thead { display: grid; grid-template-columns: 150px 80px 1fr; gap: 24px; padding-bottom: 8px; border-bottom: 2px solid #2D2A2B; }
+  .weight-table .thead span { font-size: 11px; font-weight: 700; color: #625F64; text-transform: uppercase; letter-spacing: .08em; }
+  .weight-row { display: grid; grid-template-columns: 150px 80px 1fr; align-items: center; gap: 24px; padding: 16px 0; border-bottom: 1px solid #F4F2F1; }
+  .weight-row .wval { font-family: monospace; font-size: 12px; color: #625F64; }
+  .font-card { background: #F4F2F1; border-radius: 16px; padding: 32px 40px; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 40px; }
+  .font-card .big { font-size: 64px; font-weight: 700; line-height: 1; }
+  .font-card .stack { font-family: monospace; font-size: 12px; color: #625F64; margin-top: 4px; }
+  .font-card .chars { text-align: right; font-size: 14px; color: #625F64; line-height: 1.8; }
+  .page { display: none; }
+  .page.active { display: block; }
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <h2><span style="font-size:20px">🟠</span> Orbit DS</h2>
+  <div class="nav-section">
+    <h3>Foundation</h3>
+    <a href="#" class="active" onclick="showPage('colors',this)">Colors</a>
+    <a href="#" onclick="showPage('typography',this)">Typography</a>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════ COLORS PAGE ═══════════ -->
+<div id="colors" class="page active">
+  <div class="header">
+    <div class="badge"><span style="font-size:28px">🟠</span> Orbit Design System</div>
+    <h1>Colors</h1>
+    <p class="subtitle">The Orbit colour system uses a <strong>three-tier variable architecture</strong> extracted from Figma: <em>Primitives</em> define the raw palette, <em>Alias tokens</em> assign semantic meaning, and <em>Mapped tokens</em> are consumed directly in components.</p>
+  </div>
+
+  <!-- Tier flow diagram -->
+  <div class="tier-flow">
+    <div class="pill"><span class="num" style="background:#B60058">1</span><div><strong style="font-size:13px">Primitives</strong> <span style="font-family:monospace;font-size:11px;color:#625F64">3.Brand Color/</span></div></div>
+    <span class="arrow">→</span>
+    <div class="pill"><span class="num" style="background:#F1528B">2</span><div><strong style="font-size:13px">Alias Tokens</strong> <span style="font-family:monospace;font-size:11px;color:#625F64">2.Alias Color//</span></div></div>
+    <span class="arrow">→</span>
+    <div class="pill"><span class="num" style="background:#FFB3BC;color:#2D2A2B">3</span><div><strong style="font-size:13px">Mapped Tokens</strong> <span style="font-family:monospace;font-size:11px;color:#625F64">1.Mapped Color///</span></div></div>
+  </div>
+
+  <!-- TIER 1 -->
+  <div class="tier">
+    <div class="tier-header"><span class="num" style="background:#B60058">1</span><h2>Primitives</h2></div>
+    <p class="tier-desc">The raw named colours from the Orbit brand — the foundation that all other tokens reference.</p>
+    <div class="tier-content">
+      <div class="group">
+        <h3>Brand Primitives</h3>
+        <p class="gdesc">Core named colours from the Orbit brand identity.</p>
+        <div class="swatches" id="sw-brand-prim"></div>
+      </div>
+      <div class="group">
+        <h3>Neutral Primitives</h3>
+        <p class="gdesc">Neutral tones used across surfaces, text, and borders.</p>
+        <div class="swatches" id="sw-neutral-prim"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIER 2 -->
+  <div class="tier">
+    <div class="tier-header"><span class="num" style="background:#F1528B">2</span><h2>Alias Tokens</h2></div>
+    <p class="tier-desc">Semantic references that map primitives to functional roles.</p>
+    <div class="tier-content">
+      <div class="group"><h3>Primary Scale</h3><p class="gdesc">Brand primary colour ramp — maps to Theme primitives.</p><div class="swatches" id="sw-primary"></div></div>
+      <div class="group"><h3>Text</h3><p class="gdesc">Alias tokens for text colours.</p><div class="swatches" id="sw-alias-text"></div></div>
+      <div class="group"><h3>Background</h3><p class="gdesc">Surface and background alias tokens.</p><div class="swatches" id="sw-alias-bg"></div></div>
+      <div class="group"><h3>Border</h3><p class="gdesc">Border alias tokens.</p><div class="swatches" id="sw-alias-border"></div></div>
+      <div class="group"><h3>Status</h3><p class="gdesc">Semantic status colours for feedback and alerts.</p><div class="swatches" id="sw-alias-status"></div></div>
+    </div>
+  </div>
+
+  <!-- TIER 3 -->
+  <div class="tier">
+    <div class="tier-header"><span class="num" style="background:#FFB3BC;color:#2D2A2B">3</span><h2>Mapped Tokens</h2></div>
+    <p class="tier-desc">Component-level tokens consumed directly in UI code.</p>
+    <div class="tier-content">
+      <div class="group"><h3>Text (Mapped)</h3><p class="gdesc">Component-level text colour tokens.</p><div class="swatches" id="sw-mapped-text"></div></div>
+      <div class="group"><h3>Page Layout (Mapped)</h3><p class="gdesc">Surface, border, and layout tokens for page structure.</p><div class="swatches" id="sw-mapped-layout"></div></div>
+      <div class="group"><h3>Buttons (Mapped)</h3><p class="gdesc">Button-specific colour tokens.</p><div class="swatches" id="sw-mapped-buttons"></div></div>
+      <div class="group"><h3>Icon (Mapped)</h3><p class="gdesc">Icon colour tokens for different states.</p><div class="swatches" id="sw-mapped-icon"></div></div>
+      <div class="group"><h3>Input Fields (Mapped)</h3><p class="gdesc">Input field colour tokens.</p><div class="swatches" id="sw-mapped-input"></div></div>
+    </div>
+  </div>
+
+  <div class="usage-box">
+    <h3>Usage</h3>
+    <code>
+      /* Primitives */<br>
+      color: var(--theme-lipstick-berry);&nbsp;&nbsp;/* #B60058 */<br><br>
+      /* Alias tokens */<br>
+      color: var(--text-primary);&nbsp;&nbsp;/* → Midnight Charcoal #2D2A2B */<br>
+      background: var(--surface-primary);&nbsp;&nbsp;/* → Soft Cream #F4F2F1 */<br><br>
+      /* Mapped tokens (use these in components) */<br>
+      color: var(--text-headings);&nbsp;&nbsp;/* → text-strong → #2D2A2B */<br>
+      background: var(--page-bg);&nbsp;&nbsp;/* → surface-primary → #F4F2F1 */
+    </code>
+  </div>
+</div>
+
+<!-- ═══════════ TYPOGRAPHY PAGE ═══════════ -->
+<div id="typography" class="page">
+  <div class="header">
+    <div class="badge"><span style="font-size:28px">🟠</span> Orbit Design System</div>
+    <h1>Typography</h1>
+    <p class="subtitle">Orbit HR uses <strong>Hanken Grotesk</strong> as its primary typeface — a humanist sans-serif optimised for readability across all HR interface contexts.</p>
+  </div>
+
+  <section style="margin-bottom:56px">
+    <h2 style="font-size:20px;font-weight:700;margin-bottom:20px">Font Family</h2>
+    <div class="font-card">
+      <div><div class="big">Aa</div><div class="stack">'Hanken Grotesk', system-ui, -apple-system, sans-serif</div></div>
+      <div class="chars">A B C D E F G H I J K L M N O<br>P Q R S T U V W X Y Z<br>a b c d e f g h i j k l m n o<br>p q r s t u v w x y z<br>0 1 2 3 4 5 6 7 8 9 ! @ # $ %</div>
+    </div>
+  </section>
+
+  <section style="margin-bottom:56px">
+    <h2 style="font-size:20px;font-weight:700;margin-bottom:4px">Type Scale</h2>
+    <p style="font-size:14px;color:#625F64;margin-bottom:20px;line-height:1.6">Custom scale extracted from Figma — sized in px with corresponding line-height.</p>
+    <div class="type-table">
+      <div class="thead"><span>Token</span><span>Specimen</span><span>Usage</span></div>
+      <div id="type-scale-rows"></div>
+    </div>
+  </section>
+
+  <section style="margin-bottom:56px">
+    <h2 style="font-size:20px;font-weight:700;margin-bottom:4px">Font Weights</h2>
+    <p style="font-size:14px;color:#625F64;margin-bottom:20px;line-height:1.6">Hanken Grotesk supports 7 weights from Extra Light (200) through Black (900).</p>
+    <div class="weight-table">
+      <div class="thead"><span>Weight</span><span>Value</span><span>Specimen</span></div>
+      <div id="weight-rows"></div>
+    </div>
+  </section>
+
+  <div class="usage-box">
+    <h3>Usage</h3>
+    <code>
+      font-family: var(--font-family-base);<br>
+      font-size: var(--font-size-base);&nbsp;&nbsp;/* 14px */<br>
+      font-size: var(--font-size-xl);&nbsp;&nbsp;/* 18px */
+    </code>
+  </div>
+</div>
+
+</div><!-- .main -->
+
+<script>
+// ── Nav ──
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ── Swatch renderer ──
+function swatch(name, token, hex, textLight, alias) {
+  const fg = textLight ? '#fff' : '#2D2A2B';
+  return `<div class="swatch"><div class="block" style="background:${hex}"><span style="color:${fg}">${name}</span></div><div class="meta"><div class="hex">${hex.toUpperCase()}</div><div class="token">${token}</div>${alias ? `<div class="alias">→ ${alias}</div>` : ''}</div></div>`;
+}
+
+// ── Tier 1: Primitives ──
+document.getElementById('sw-brand-prim').innerHTML = [
+  swatch('Lipstick Berry','Theme/Lipstick Berry','#B60058',true),
+  swatch('Coral Blush','Theme/Coral Blush','#F1528B',true),
+  swatch('Peach Dream','Theme/Peach Dream','#FFB3BC',false),
+  swatch('Nude Rose','Theme/Nude Rose','#F8E9ED',false),
+].join('');
+
+document.getElementById('sw-neutral-prim').innerHTML = [
+  swatch('Midnight Charcoal','Theme/Midnight Charcoal','#2D2A2B',true),
+  swatch('Graphite Glam','Theme/Graphite Glam','#625F64',true),
+  swatch('Latte','Theme/Latte','#EFEBE7',false),
+  swatch('Soft Cream','Theme/Soft Cream','#F4F2F1',false),
+  swatch('Pearl White','Theme/Pearl White','#F8F8F8',false),
+].join('');
+
+// ── Tier 2: Alias ──
+document.getElementById('sw-primary').innerHTML = [
+  swatch('Primary 500','Primary/500','#B60058',true,'Theme/Lipstick Berry'),
+  swatch('Primary 400','Primary/400','#F1528B',true,'Theme/Coral Blush'),
+  swatch('Primary 300','Primary/300','#FFB3BC',false,'Theme/Peach Dream'),
+  swatch('Primary 200','Primary/200','#F8E9ED',false,'Theme/Nude Rose'),
+  swatch('Primary 100','Primary/100','#F8F8F8',false,'Theme/Pearl White'),
+].join('');
+
+document.getElementById('sw-alias-text').innerHTML = [
+  swatch('Text Strong','Text/text-strong','#2D2A2B',true,'Midnight Charcoal'),
+  swatch('Text Primary','Text/text-primary','#2D2A2B',true,'Midnight Charcoal'),
+  swatch('Text Secondary','Text/text-secondary','#625F64',true,'Graphite Glam'),
+  swatch('Text Subtle','Text/text-subtle','#BDBDBD',false),
+  swatch('Text Disabled','Text/text-disabled','#78909C',true),
+  swatch('Text On-Brand','Text/text-on-brand','#F8F8F8',false,'Pearl White'),
+].join('');
+
+document.getElementById('sw-alias-bg').innerHTML = [
+  swatch('Surface Primary','Background/surface-primary','#F4F2F1',false,'Soft Cream'),
+  swatch('Surface Secondary','Background/surface-secondary','#F8F8F8',false,'Pearl White'),
+  swatch('Surface Tertiary','Background/surface-tertiary','#EFEBE7',false,'Latte'),
+  swatch('Surface Inverted','Background/surface-inverted','#424242',true),
+  swatch('Surface Brand 200','Background/surface-brand-200','#F8E9ED',false,'Nude Rose'),
+  swatch('Surface Brand 300','Background/surface-brand-300','#FFB3BC',false,'Peach Dream'),
+  swatch('Surface Brand 400','Background/surface-brand-400','#F1528B',true,'Coral Blush'),
+].join('');
+
+document.getElementById('sw-alias-border').innerHTML = [
+  swatch('Border Subtle','Border/border-subtle','#F8F8F8',false),
+  swatch('Border Light','Border/border-light','#EFEBE7',false),
+  swatch('Border Default','Border/border-default','#FFB3BC',false),
+  swatch('Border Strong','Border/border-strong','#F1528B',true),
+  swatch('Border Interactive','Border/border-interactive','#B60058',true),
+].join('');
+
+document.getElementById('sw-alias-status').innerHTML = [
+  swatch('Success','Status/status-success','#AED581',false),
+  swatch('Warning','Status/status-warning','#FFD54F',false),
+  swatch('Error','Status/status-error','#E57373',false),
+  swatch('Info','Status/status-info','#64B5F6',false),
+].join('');
+
+// ── Tier 3: Mapped ──
+document.getElementById('sw-mapped-text').innerHTML = [
+  swatch('Headings','Text/headings','#2D2A2B',true,'Text/text-strong'),
+  swatch('Body','Text/body','#2D2A2B',true,'Text/text-primary'),
+  swatch('Secondary','Text/secondary','#625F64',true,'Text/text-secondary'),
+  swatch('Action','Text/action','#B60058',true,'Primary/500'),
+  swatch('Disabled','Text/disbaled','#78909C',true,'Text/text-disabled'),
+  swatch('Brand Primary','Text/Brand Primary','#F1528B',true,'Primary/400'),
+  swatch('Brand Secondary','Text/Brand Secondary','#FFB3BC',false,'Primary/300'),
+  swatch('On-Action','Text/on-action','#F8F8F8',false,'Text/text-on-brand'),
+  swatch('Info','Text/info','#B60058',true,'Primary/500'),
+  swatch('Warning','Text/warning','#FFD54F',false,'Status/status-warning'),
+  swatch('Success','Text/success','#AED581',false,'Status/status-success'),
+  swatch('Error','Text/error','#E57373',false,'Status/status-error'),
+].join('');
+
+document.getElementById('sw-mapped-layout').innerHTML = [
+  swatch('Page Background','Page Layout/page-bg','#F4F2F1',false,'surface-primary'),
+  swatch('Card Background','Page Layout/card-bg','#F8F8F8',false,'surface-secondary'),
+  swatch('Fill','Page Layout/Fill','#EFEBE7',false,'surface-tertiary'),
+  swatch('Active','Page Layout/Active','#F1528B',true,'Primary/400'),
+  swatch('Input','Page Layout/Input','#FAFAFA',false),
+  swatch('Border Light','Page Layout/border-light','#F8F8F8',false,'border-subtle'),
+  swatch('Border Primary','Page Layout/border-primary','#FFB3BC',false),
+  swatch('Modal Overlay','Page Layout/modal-overlay-bg','#000000',true),
+].join('');
+
+document.getElementById('sw-mapped-buttons').innerHTML = [
+  swatch('Primary BG','Buttons/button-primary-bg','#F1528B',true),
+  swatch('Primary Text','Buttons/button-primary-text','#F8F8F8',false),
+  swatch('Primary Border','Buttons/button-primary-border','#FFB3BC',false),
+  swatch('Secondary BG','Buttons/button-secondary-bg','#FFB3BC',false),
+  swatch('Secondary Text','Buttons/button-secondary-text','#2D2A2B',true),
+  swatch('Secondary Border','Buttons/button-secondary-border','#F8F8F8',false),
+  swatch('Secondary Hover','Buttons/button-secondary-hover-bg','#F8F8F8',false),
+  swatch('Tertiary BG','Buttons/button-tertiary-bg','#F5F5F5',false),
+  swatch('Tertiary Text','Buttons/button-tertiary-text','#2D2A2B',true),
+].join('');
+
+document.getElementById('sw-mapped-icon').innerHTML = [
+  swatch('Default','Icon/default','#212121',true),
+  swatch('Primary','Icon/primary','#F1528B',true),
+  swatch('Secondary','Icon/secondary','#757575',true),
+  swatch('Disabled','Icon/disbaled','#F8E9ED',false),
+  swatch('On-Action','Icon/on-action','#F8F8F8',false),
+  swatch('Info','Icon/info','#B60058',true),
+  swatch('Warning','Icon/warning','#FFD54F',false),
+  swatch('Success','Icon/success','#AED581',false),
+  swatch('Error','Icon/error','#E57373',false),
+].join('');
+
+document.getElementById('sw-mapped-input').innerHTML = [
+  swatch('BG Default','Input Fields/input-bg-default','#FAFAFA',false),
+  swatch('BG Disabled','Input Fields/input-bg-disabled','#CFD8DC',false),
+  swatch('Border Default','Input Fields/input-border-default','#B0BEC5',false),
+  swatch('Border Active','Input Fields/input-border-active','#78909C',true),
+  swatch('Border Error','Input Fields/input-border-error','#E57373',false),
+  swatch('Text Placeholder','Input Fields/input-text-placeholder','#BDBDBD',false),
+].join('');
+
+// ── Typography ──
+const typeScale = [
+  {name:'text-6xl',size:48,lh:60,desc:'Hero / display headings'},
+  {name:'text-5xl',size:36,lh:48,desc:'Page titles'},
+  {name:'text-4xl',size:30,lh:42,desc:'Section headings'},
+  {name:'text-3xl',size:24,lh:36,desc:'Card titles'},
+  {name:'text-2xl',size:21,lh:36,desc:'Sub-headings'},
+  {name:'text-xl',size:18,lh:30,desc:'Large body / lead text'},
+  {name:'text-lg',size:16,lh:27,desc:'Emphasized body text'},
+  {name:'text-base',size:14,lh:21,desc:'Default body copy'},
+  {name:'text-sm',size:12,lh:21,desc:'Captions / helper text'},
+  {name:'text-xs',size:10.5,lh:18,desc:'Micro labels / badges'},
+];
+document.getElementById('type-scale-rows').innerHTML = typeScale.map(s =>
+  `<div class="type-row"><div><div class="tname">${s.name}</div><div class="tinfo">${s.size}px / ${s.lh}px</div></div><p class="specimen" style="font-size:${s.size}px;line-height:${s.lh}px">The quick brown fox jumps over the lazy dog</p><div class="usage">${s.desc}</div></div>`
+).join('');
+
+const weights = [
+  {name:'Extra Light',val:200,cls:'font-extralight'},
+  {name:'Light',val:300,cls:'font-light'},
+  {name:'Regular',val:400,cls:'font-normal'},
+  {name:'Medium',val:500,cls:'font-medium'},
+  {name:'Semi Bold',val:600,cls:'font-semibold'},
+  {name:'Bold',val:700,cls:'font-bold'},
+  {name:'Extra Bold',val:800,cls:'font-extrabold'},
+  {name:'Black',val:900,cls:'font-black'},
+];
+document.getElementById('weight-rows').innerHTML = weights.map(w =>
+  `<div class="weight-row"><div><div style="font-size:13px;font-weight:${w.val}">${w.name}</div><div style="font-family:monospace;font-size:10px;color:#625F64;margin-top:2px">.${w.cls}</div></div><div class="wval">${w.val}</div><p style="font-size:18px;font-weight:${w.val};line-height:30px">Orbit HR — People first, always.</p></div>`
+).join('');
+</script>
+</body>
+</html>

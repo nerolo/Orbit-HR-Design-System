@@ -1,0 +1,135 @@
+/* ─── Orbit HR Design System — Global Styles ──────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ── Design Tokens (from Figma Variables) ─────────────────────────────────── */
+:root {
+  /* ── Tier 1: Primitives (3.Brand Color/) ──────────────────────────────── */
+  --theme-lipstick-berry:    #B60058;
+  --theme-coral-blush:       #F1528B;
+  --theme-peach-dream:       #FFB3BC;
+  --theme-nude-rose:         #F8E9ED;
+  --theme-midnight-charcoal: #2D2A2B;
+  --theme-graphite-glam:     #625F64;
+  --theme-latte:             #EFEBE7;
+  --theme-soft-cream:        #F4F2F1;
+  --theme-pearl-white:       #F8F8F8;
+
+  /* ── Tier 2: Alias Tokens (2.Alias Color//) ───────────────────────────── */
+  /* Primary scale */
+  --primary-500: var(--theme-lipstick-berry);
+  --primary-400: var(--theme-coral-blush);
+  --primary-300: var(--theme-peach-dream);
+  --primary-200: var(--theme-nude-rose);
+  --primary-100: var(--theme-pearl-white);
+
+  /* Text */
+  --text-strong:    var(--theme-midnight-charcoal);
+  --text-primary:   var(--theme-midnight-charcoal);
+  --text-secondary: var(--theme-graphite-glam);
+  --text-subtle:    #BDBDBD;
+  --text-disabled:  #78909C;
+  --text-on-brand:  var(--theme-pearl-white);
+
+  /* Background / Surfaces */
+  --surface-primary:   var(--theme-soft-cream);
+  --surface-secondary: var(--theme-pearl-white);
+  --surface-tertiary:  var(--theme-latte);
+  --surface-inverted:  #424242;
+  --surface-brand-200: var(--theme-nude-rose);
+  --surface-brand-300: var(--theme-peach-dream);
+  --surface-brand-400: var(--theme-coral-blush);
+
+  /* Border */
+  --border-subtle:      var(--theme-pearl-white);
+  --border-light:       var(--theme-latte);
+  --border-default:     var(--theme-peach-dream);
+  --border-strong:      var(--theme-coral-blush);
+  --border-interactive: var(--theme-lipstick-berry);
+
+  /* Status */
+  --status-success: #AED581;
+  --status-warning: #FFD54F;
+  --status-error:   #E57373;
+  --status-info:    #64B5F6;
+
+  /* ── Tier 3: Mapped Tokens (1.Mapped Color///) ────────────────────────── */
+  /* Text */
+  --text-headings:       var(--text-strong);
+  --text-body:           var(--text-primary);
+  --text-action:         var(--primary-500);
+  --text-brand-primary:  var(--primary-400);
+  --text-brand-secondary: var(--primary-300);
+  --text-on-action:      var(--text-on-brand);
+
+  /* Page Layout */
+  --page-bg:           var(--surface-primary);
+  --card-bg:           var(--surface-secondary);
+  --page-fill:         var(--surface-tertiary);
+  --page-active:       var(--primary-400);
+  --page-input:        #FAFAFA;
+  --page-border-light: var(--border-subtle);
+  --page-border-primary: var(--theme-peach-dream);
+  --modal-overlay-bg:  #000000;
+
+  /* Buttons */
+  --btn-primary-bg:       var(--primary-400);
+  --btn-primary-text:     var(--theme-pearl-white);
+  --btn-primary-border:   var(--theme-peach-dream);
+  --btn-secondary-bg:     var(--theme-peach-dream);
+  --btn-secondary-text:   var(--theme-midnight-charcoal);
+  --btn-secondary-border: var(--theme-pearl-white);
+  --btn-tertiary-bg:      #F5F5F5;
+  --btn-tertiary-text:    var(--theme-midnight-charcoal);
+
+  /* Icon */
+  --icon-default:   #212121;
+  --icon-primary:   var(--primary-400);
+  --icon-secondary: #757575;
+  --icon-disabled:  var(--theme-nude-rose);
+  --icon-on-action: var(--theme-pearl-white);
+
+  /* Input Fields */
+  --input-bg-default:       #FAFAFA;
+  --input-bg-disabled:      #CFD8DC;
+  --input-border-default:   #B0BEC5;
+  --input-border-active:    #78909C;
+  --input-border-error:     var(--status-error);
+  --input-text-placeholder: #BDBDBD;
+
+  /* ── Typography ───────────────────────────────────────────────────────── */
+  --font-family-base: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+
+  --font-size-xs:   0.656rem;   /* 10.5px / lh 18 */
+  --font-size-sm:   0.75rem;    /* 12px   / lh 21 */
+  --font-size-base: 0.875rem;   /* 14px   / lh 21 */
+  --font-size-lg:   1rem;       /* 16px   / lh 27 */
+  --font-size-xl:   1.125rem;   /* 18px   / lh 30 */
+  --font-size-2xl:  1.313rem;   /* 21px   / lh 36 */
+  --font-size-3xl:  1.5rem;     /* 24px   / lh 36 */
+  --font-size-4xl:  1.875rem;   /* 30px   / lh 42 */
+  --font-size-5xl:  2.25rem;    /* 36px   / lh 48 */
+  --font-size-6xl:  3rem;       /* 48px   / lh 60 */
+
+  /* Border Radius */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+}
+
+/* ── Base Reset ────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
