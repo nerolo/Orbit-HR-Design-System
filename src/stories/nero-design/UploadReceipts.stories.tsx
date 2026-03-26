@@ -27,7 +27,11 @@ export const Default: Story = {
     <div className="bg-[#f8f8f8] flex flex-col p-8 rounded-[2px] w-[443px]"
       style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)', fontFamily: 'Hanken Grotesk, sans-serif' }}>
       <div className="flex items-center gap-[4px] mb-9">
-        {/* UploadIcon */}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#212121" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="17 8 12 3 7 8" />
+          <line x1="12" y1="3" x2="12" y2="15" />
+        </svg>
         <span className="text-[10.5px] font-medium text-[#2d2a2b]">Upload Receipts</span>
       </div>
       <div className="flex items-baseline gap-2 mb-8">
