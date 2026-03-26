@@ -72,3 +72,5 @@ export const StripedColumns: Story = { render: () => <TableWithStripedColumns />
 export const Transactions: Story = { render: () => <TransactionsTable /> };
 export const Members: Story = { render: () => <MembersTable /> };
 export const Sortable: Story = { render: () => <SortableTable /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">Table is a layout component — see Default story for full example.</div> };

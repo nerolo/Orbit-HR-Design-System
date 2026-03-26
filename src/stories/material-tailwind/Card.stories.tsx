@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   CardDefault, SimpleCard, ProfileCard, LoginCard, EcommerceCard, PricingCard,
 } from './Card';
+import { Card, CardHeader, CardBody, CardFooter, Typography } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Card',
@@ -61,3 +62,11 @@ export const Profile: Story = { render: () => <ProfileCard /> };
 export const Login: Story = { render: () => <LoginCard /> };
 export const Ecommerce: Story = { render: () => <EcommerceCard /> };
 export const Pricing: Story = { render: () => <PricingCard /> };
+
+export const Playground: Story = {
+  render: (args: any) => <Card {...args}><CardBody><Typography variant="h5" color="blue-gray">Card Title</Typography><Typography>Card content goes here.</Typography></CardBody></Card>,
+  args: { shadow: true, color: 'transparent' },
+  argTypes: {
+    shadow: { control: 'boolean' },
+  },
+};

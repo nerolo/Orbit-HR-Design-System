@@ -4,6 +4,7 @@ import {
   RadioDefault, RadioColors, RadioCustomIcon, RadioRippleEffect,
   RadioDisabled, RadioWithLink, RadioVerticalList, RadioHorizontalList, RadioCustomStyles,
 } from './Radio';
+import { Radio } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Radio Button',
@@ -41,3 +42,14 @@ export const WithLink: Story = { render: () => <RadioWithLink /> };
 export const VerticalList: Story = { render: () => <RadioVerticalList /> };
 export const HorizontalList: Story = { render: () => <RadioHorizontalList /> };
 export const CustomStyles: Story = { render: () => <RadioCustomStyles /> };
+
+export const Playground: Story = {
+  render: (args) => <Radio {...args} />,
+  args: { label: 'Option A', color: 'blue', disabled: false, defaultChecked: false },
+  argTypes: {
+    label: { control: 'text' },
+    color: { control: 'select', options: ['blue', 'red', 'green', 'amber', 'gray'] },
+    disabled: { control: 'boolean' },
+    defaultChecked: { control: 'boolean' },
+  },
+};

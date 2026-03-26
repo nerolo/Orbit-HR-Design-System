@@ -56,3 +56,5 @@ export function MegaMenuDefault() {
 };
 export const WithHover: Story = { render: () => <MegaMenuWithHover /> };
 export const WithPlacement: Story = { render: () => <MegaMenuWithPlacement /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">MegaMenu is a complex navigation component — see Default story for full example.</div> };

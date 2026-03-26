@@ -4,6 +4,7 @@ import {
   BadgeDefault, BadgeColors, BadgePlacement, BadgeOverlap,
   BadgeWithBorder, BadgeDot, BadgeCustomStyles,
 } from './Badge';
+import { Badge } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Badge',
@@ -38,3 +39,12 @@ export const Overlap: Story = { render: () => <BadgeOverlap /> };
 export const WithBorder: Story = { render: () => <BadgeWithBorder /> };
 export const Dot: Story = { render: () => <BadgeDot /> };
 export const CustomStyles: Story = { render: () => <BadgeCustomStyles /> };
+
+export const Playground: Story = {
+  render: (args: any) => <Badge {...args}><button className="rounded-md bg-gray-900 p-2 text-white">Inbox</button></Badge>,
+  args: { color: 'red', content: '5', placement: 'top-end' },
+  argTypes: {
+    color: { control: 'select', options: ['blue', 'red', 'green', 'amber', 'gray'] },
+    placement: { control: 'select', options: ['top-start', 'top-end', 'bottom-start', 'bottom-end'] },
+  },
+};

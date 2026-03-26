@@ -4,6 +4,7 @@ import {
   AvatarDefault, AvatarVariants, AvatarSizes, AvatarWithBorder,
   AvatarWithText, AvatarStack, AvatarWithDotIndicator, AvatarCustomStyles,
 } from './Avatar';
+import { Avatar } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Avatar',
@@ -35,3 +36,12 @@ export const WithText: Story = { render: () => <AvatarWithText /> };
 export const Stack: Story = { render: () => <AvatarStack /> };
 export const WithDotIndicator: Story = { render: () => <AvatarWithDotIndicator /> };
 export const CustomStyles: Story = { render: () => <AvatarCustomStyles /> };
+
+export const Playground: Story = {
+  render: (args) => <Avatar {...args} />,
+  args: { size: 'md', variant: 'circular', src: 'https://docs.material-tailwind.com/img/face-2.jpg', alt: 'avatar' },
+  argTypes: {
+    size: { control: 'select', options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] },
+    variant: { control: 'select', options: ['circular', 'rounded', 'square'] },
+  },
+};

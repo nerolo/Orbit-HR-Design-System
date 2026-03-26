@@ -37,3 +37,5 @@ export const Circular: Story = { render: () => <CircularImg /> };
 export const WithCaption: Story = { render: () => <ImgWithCaption /> };
 export const WithShadow: Story = { render: () => <ImgWithShadow /> };
 export const WithBlurredCaption: Story = { render: () => <ImgWithBlurredCaption /> };
+
+export const Playground: Story = { render: () => <img src="https://docs.material-tailwind.com/img/blog.jpg" alt="image" className="h-auto max-w-full rounded-lg" /> };

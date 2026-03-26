@@ -78,3 +78,5 @@ export function SimpleFooter() {
 export const WithLogo: Story = { render: () => <FooterWithLogo /> };
 export const WithSocialLinks: Story = { render: () => <FooterWithSocialLinks /> };
 export const WithSitemap: Story = { render: () => <FooterWithSitemap /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">Footer is a layout component — see Default story for full example.</div> };

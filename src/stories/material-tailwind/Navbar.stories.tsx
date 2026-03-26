@@ -80,3 +80,5 @@ export function NavbarDefault() {
   },
 };
 export const WithSearch: Story = { render: () => <NavbarWithSearch /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">Navbar is a layout component — see Default story for full example.</div> };

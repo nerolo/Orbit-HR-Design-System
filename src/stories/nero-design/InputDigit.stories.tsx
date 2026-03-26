@@ -4,15 +4,27 @@ import { InputDigitDefault, InputDigitActive, InputDigitOTPRow, InputDigitAllSta
 
 const meta = {
   title: 'Nero design/Input Digit',
-  component: InputDigitAllStates,
+  component: InputDigitDefault,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof InputDigitAllStates>;
+  args: {
+    label: 'Code',
+    value: '',
+    isActive: false,
+    disabled: false,
+  },
+  argTypes: {
+    label:    { control: 'text' },
+    value:    { control: 'text' },
+    isActive: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+  },
+} satisfies Meta<typeof InputDigitDefault>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const AllStates: Story = {
+export const Default: Story = {
   parameters: {
     docs: {
       source: {
@@ -54,6 +66,6 @@ export function InputDigitActive() {
     },
   },
 };
-export const Default: Story = { render: () => <InputDigitDefault /> };
 export const Active: Story = { render: () => <InputDigitActive /> };
 export const OTPRow: Story = { render: () => <InputDigitOTPRow /> };
+export const AllStates: Story = { render: () => <InputDigitAllStates /> };

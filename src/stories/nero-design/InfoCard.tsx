@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Generic stat icon
 function ChartIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#625f64" strokeWidth="1.5">
@@ -25,68 +24,94 @@ function ClockIcon() {
   );
 }
 
-// Single data variant
-export function InfoCardSingle() {
+export interface InfoCardProps {
+  title?: string;
+  value?: number | string;
+  valueLabel?: string;
+  meta?: string;
+  layout?: 'single' | 'horizontal';
+  icon?: 'chart' | 'calendar' | 'clock';
+}
+
+function IconComponent({ icon }: { icon: InfoCardProps['icon'] }) {
+  if (icon === 'calendar') return <CalendarIcon />;
+  if (icon === 'clock') return <ClockIcon />;
+  return <ChartIcon />;
+}
+
+export function InfoCardSingle({
+  title = 'Total Employees',
+  value = 245,
+  valueLabel = 'active',
+  meta = 'Across all locations',
+  layout = 'single',
+  icon = 'chart',
+}: InfoCardProps) {
+  if (layout === 'horizontal') {
+    return (
+      <div
+        className="flex items-center justify-between bg-[#f8f8f8] px-6 py-5 w-[400px] h-[100px]"
+        style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)' }}
+      >
+        <div className="flex items-center gap-2">
+          <IconComponent icon={icon} />
+          <span className="text-[18px] font-medium text-[#2d2a2b] leading-[30px]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
+            {title}
+          </span>
+        </div>
+        <div className="flex items-baseline gap-2">
+          <span className="text-[48px] font-bold text-[#2d2a2b] leading-[60px]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
+            {value}
+          </span>
+          <span className="text-[14px] font-medium text-[#625f64] leading-[16px]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
+            {valueLabel}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="flex flex-col justify-between bg-[#f8f8f8] px-6 py-5 h-[200px] w-[286px]"
       style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)' }}
     >
-      {/* Header */}
       <div className="flex items-center gap-2">
-        <ChartIcon />
-        <span
-          className="text-[18px] font-medium text-[#2d2a2b] leading-[30px]"
-          style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-        >
-          Total Employees
+        <IconComponent icon={icon} />
+        <span className="text-[18px] font-medium text-[#2d2a2b] leading-[30px]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
+          {title}
         </span>
       </div>
-      {/* Data */}
       <div className="flex flex-col gap-1">
         <div className="flex items-baseline gap-2">
-          <span
-            className="text-[48px] font-bold text-[#2d2a2b] leading-[60px]"
-            style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-          >
-            245
+          <span className="text-[48px] font-bold text-[#2d2a2b] leading-[60px]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
+            {value}
           </span>
-          <span
-            className="text-[14px] font-medium text-[#625f64] leading-[16px]"
-            style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-          >
-            active
+          <span className="text-[14px] font-medium text-[#625f64] leading-[16px]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
+            {valueLabel}
           </span>
         </div>
-        <span
-          className="text-[12px] font-medium text-[#625f64] leading-[21px]"
-          style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-        >
-          Across all locations
+        <span className="text-[12px] font-medium text-[#625f64] leading-[21px]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
+          {meta}
         </span>
       </div>
     </div>
   );
 }
 
-// Two-slot variant (stacked)
+// Two-slot variant (stacked) — kept as-is for demo
 export function InfoCardTwoSlot() {
   return (
     <div
       className="flex flex-col justify-between bg-[#f8f8f8] px-6 py-5 h-[200px] w-[286px]"
       style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)' }}
     >
-      {/* Header */}
       <div className="flex items-center gap-2">
         <CalendarIcon />
-        <span
-          className="text-[18px] font-medium text-[#2d2a2b] leading-[30px]"
-          style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-        >
+        <span className="text-[18px] font-medium text-[#2d2a2b] leading-[30px]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
           Leave Balance
         </span>
       </div>
-      {/* Two data slots stacked */}
       <div className="flex flex-col gap-2">
         <div className="flex flex-col gap-0.5">
           <span className="text-[12px] font-medium text-[#625f64]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>Annual</span>
@@ -107,38 +132,8 @@ export function InfoCardTwoSlot() {
   );
 }
 
-// Horizontal variant
 export function InfoCardHorizontal() {
-  return (
-    <div
-      className="flex items-center justify-between bg-[#f8f8f8] px-6 py-5 w-[400px] h-[100px]"
-      style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)' }}
-    >
-      <div className="flex items-center gap-2">
-        <ClockIcon />
-        <span
-          className="text-[18px] font-medium text-[#2d2a2b] leading-[30px]"
-          style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-        >
-          Pending Leaves
-        </span>
-      </div>
-      <div className="flex items-baseline gap-2">
-        <span
-          className="text-[48px] font-bold text-[#2d2a2b] leading-[60px]"
-          style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-        >
-          12
-        </span>
-        <span
-          className="text-[14px] font-medium text-[#625f64] leading-[16px]"
-          style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-        >
-          awaiting approval
-        </span>
-      </div>
-    </div>
-  );
+  return <InfoCardSingle title="Pending Leaves" value={12} valueLabel="awaiting approval" layout="horizontal" icon="clock" />;
 }
 
 export function InfoCardAllVariants() {

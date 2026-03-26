@@ -59,3 +59,5 @@ export function DefaultPagination() {
 export const Circular: Story = { render: () => <CircularPagination /> };
 export const Simple: Story = { render: () => <SimplePagination /> };
 export const Group: Story = { render: () => <PaginationGroup /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">Pagination is a stateful component — see Default story for full example.</div> };

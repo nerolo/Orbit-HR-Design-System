@@ -55,3 +55,5 @@ export const WithIcon: Story = { render: () => <StepperWithIcon /> };
 export const WithDots: Story = { render: () => <StepperWithDots /> };
 export const WithContent: Story = { render: () => <StepperWithContent /> };
 export const Custom: Story = { render: () => <CustomStepper /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">Stepper is a stateful component — see Default story for full example.</div> };

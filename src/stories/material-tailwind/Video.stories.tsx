@@ -30,3 +30,5 @@ export const Default: Story = {
 };
 export const Autoplay: Story = { render: () => <AutoplayVideo /> };
 export const Muted: Story = { render: () => <MutedVideo /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">Video is a layout component — see Default story for full example.</div> };

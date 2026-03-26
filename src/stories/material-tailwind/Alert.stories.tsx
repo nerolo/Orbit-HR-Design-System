@@ -4,6 +4,7 @@ import {
   AlertDefault, AlertVariants, AlertColors, AlertIcon,
   AlertDismissible, AlertCustomAnimation, AlertWithContent, AlertCustomStyles,
 } from './Alert';
+import { Alert } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Alert',
@@ -35,3 +36,13 @@ export const Dismissible: Story = { render: () => <AlertDismissible /> };
 export const CustomAnimation: Story = { render: () => <AlertCustomAnimation /> };
 export const WithContent: Story = { render: () => <AlertWithContent /> };
 export const CustomStyles: Story = { render: () => <AlertCustomStyles /> };
+
+export const Playground: Story = {
+  render: (args) => <Alert {...args} />,
+  args: { variant: 'filled', color: 'blue', children: 'A simple alert for showing message.' },
+  argTypes: {
+    variant: { control: 'select', options: ['filled', 'gradient', 'outlined', 'ghost'] },
+    color: { control: 'select', options: ['blue', 'red', 'green', 'amber', 'gray'] },
+    children: { control: 'text' },
+  },
+};

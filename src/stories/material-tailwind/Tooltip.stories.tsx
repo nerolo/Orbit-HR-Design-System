@@ -4,6 +4,7 @@ import {
   TooltipDefault, TooltipPlacement, TooltipCustomAnimation,
   TooltipWithHelperIcon, TooltipCustomStyles,
 } from './Tooltip';
+import { Tooltip, Button } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Tooltip',
@@ -36,3 +37,12 @@ export const Placement: Story = { render: () => <TooltipPlacement /> };
 export const CustomAnimation: Story = { render: () => <TooltipCustomAnimation /> };
 export const WithHelperIcon: Story = { render: () => <TooltipWithHelperIcon /> };
 export const CustomStyles: Story = { render: () => <TooltipCustomStyles /> };
+
+export const Playground: Story = {
+  render: (args: any) => <Tooltip {...args}><Button>Hover Me</Button></Tooltip>,
+  args: { content: 'Material Tailwind', placement: 'top' },
+  argTypes: {
+    content: { control: 'text' },
+    placement: { control: 'select', options: ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'right'] },
+  },
+};

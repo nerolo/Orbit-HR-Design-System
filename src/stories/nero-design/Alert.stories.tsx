@@ -7,6 +7,18 @@ const meta = {
   component: AlertDefault,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],
+  args: {
+    title: 'March 1st Readiness: 31 days remaining',
+    subtitle: '87 days scheduled for forfeiture company-wide. Review high-risk employees.',
+    actionLabel: 'Review',
+    color: '#ef5350',
+  },
+  argTypes: {
+    title: { control: 'text' },
+    subtitle: { control: 'text' },
+    actionLabel: { control: 'text' },
+    color: { control: 'color' },
+  },
 } satisfies Meta<typeof AlertDefault>;
 
 export default meta;

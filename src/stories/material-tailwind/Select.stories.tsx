@@ -4,6 +4,7 @@ import {
   SelectDefault, SelectVariants, SelectSizes, SelectColors, SelectValidations,
   ControlledSelect, SelectCustomAnimation, SelectDisabled,
 } from './Select';
+import { Select, Option } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Select',
@@ -45,3 +46,15 @@ export const Validations: Story = { render: () => <SelectValidations /> };
 export const Controlled: Story = { render: () => <ControlledSelect /> };
 export const CustomAnimation: Story = { render: () => <SelectCustomAnimation /> };
 export const Disabled: Story = { render: () => <SelectDisabled /> };
+
+export const Playground: Story = {
+  render: (args: any) => <div className="w-72"><Select {...args}><Option value="react">React</Option><Option value="vue">Vue</Option><Option value="angular">Angular</Option></Select></div>,
+  args: { label: 'Framework', size: 'md', color: 'blue', variant: 'outlined', disabled: false },
+  argTypes: {
+    label: { control: 'text' },
+    size: { control: 'select', options: ['md', 'lg'] },
+    color: { control: 'select', options: ['blue', 'red', 'green', 'amber', 'gray'] },
+    variant: { control: 'select', options: ['outlined', 'standard', 'static'] },
+    disabled: { control: 'boolean' },
+  },
+};

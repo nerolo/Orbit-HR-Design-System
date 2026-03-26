@@ -1,12 +1,5 @@
 import React from 'react';
 
-interface LeaveItem {
-  label: string;
-  used: number;
-  total: number | null;
-  icon: React.ReactNode;
-}
-
 function SunIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="#f1528b">
@@ -39,77 +32,80 @@ function BanknotesIcon() {
   );
 }
 
-const LEAVE_ITEMS: LeaveItem[] = [
-  { label: 'Annual Leave',    used: 12, total: 15,   icon: <SunIcon /> },
-  { label: 'Paid Sick Leave', used: 2,  total: 2,    icon: <HeartIcon /> },
-  { label: 'Casual Leave',    used: 0,  total: 5,    icon: <CalendarIcon /> },
-  { label: 'Maternity Leave', used: 10, total: 10,   icon: <HeartIcon /> },
-  { label: 'Unpaid Leave',    used: 1,  total: null, icon: <BanknotesIcon /> },
-];
+export interface LeaveBalanceCardProps {
+  annualUsed?: number;
+  annualTotal?: number;
+  sickUsed?: number;
+  sickTotal?: number;
+  casualUsed?: number;
+  casualTotal?: number;
+  maternityUsed?: number;
+  maternityTotal?: number;
+  unpaidUsed?: number;
+}
+
+interface LeaveItem {
+  label: string;
+  used: number;
+  total: number | null;
+  icon: React.ReactNode;
+}
 
 function LeaveRow({ item }: { item: LeaveItem }) {
   const pct = item.total ? Math.round((item.used / item.total) * 100) : 50;
-
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span>{item.icon}</span>
-          <span
-            className="text-[14px] font-normal text-[#212121] leading-[21px]"
-            style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-          >
+          <span className="text-[14px] font-normal text-[#212121] leading-[21px]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
             {item.label}
           </span>
         </div>
-        <span
-          className="text-[12px] font-bold leading-[21px]"
-          style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-        >
+        <span className="text-[12px] font-bold leading-[21px]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
           <span className="text-[#b60058]">{item.used}</span>
           <span className="text-[#212121]"> / {item.total ?? '—'}</span>
         </span>
       </div>
-      {/* Progress bar */}
       <div className="h-2 rounded-full bg-[#e0e0e0] overflow-hidden">
-        <div
-          className="h-full rounded-full bg-[#b60058]"
-          style={{ width: `${pct}%` }}
-        />
+        <div className="h-full rounded-full bg-[#b60058]" style={{ width: `${pct}%` }} />
       </div>
     </div>
   );
 }
 
-export function LeaveBalanceCard() {
-  const totalRemaining = LEAVE_ITEMS.reduce((acc, item) => {
-    return acc + (item.total ? item.total - item.used : 0);
-  }, 0);
+export function LeaveBalanceCard({
+  annualUsed = 12,
+  annualTotal = 15,
+  sickUsed = 2,
+  sickTotal = 2,
+  casualUsed = 0,
+  casualTotal = 5,
+  maternityUsed = 10,
+  maternityTotal = 10,
+  unpaidUsed = 1,
+}: LeaveBalanceCardProps) {
+  const items: LeaveItem[] = [
+    { label: 'Annual Leave',    used: annualUsed,   total: annualTotal,   icon: <SunIcon /> },
+    { label: 'Paid Sick Leave', used: sickUsed,     total: sickTotal,     icon: <HeartIcon /> },
+    { label: 'Casual Leave',    used: casualUsed,   total: casualTotal,   icon: <CalendarIcon /> },
+    { label: 'Maternity Leave', used: maternityUsed, total: maternityTotal, icon: <HeartIcon /> },
+    { label: 'Unpaid Leave',    used: unpaidUsed,   total: null,          icon: <BanknotesIcon /> },
+  ];
+
+  const totalRemaining = items.reduce((acc, item) =>
+    acc + (item.total ? item.total - item.used : 0), 0);
 
   return (
-    <div
-      className="bg-[#f8f8f8] w-[348px]"
-      style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)' }}
-    >
-      {/* Leave rows */}
+    <div className="bg-[#f8f8f8] w-[348px]" style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)' }}>
       <div className="flex flex-col gap-4 px-4 py-3 border-b border-[#efebe7]">
-        {LEAVE_ITEMS.map((item) => (
-          <LeaveRow key={item.label} item={item} />
-        ))}
+        {items.map((item) => <LeaveRow key={item.label} item={item} />)}
       </div>
-
-      {/* Footer */}
       <div className="flex items-baseline gap-2 px-6 py-4 border-t border-[#efebe7]">
-        <span
-          className="text-[30px] font-bold text-[#212121] leading-[40px]"
-          style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-        >
+        <span className="text-[30px] font-bold text-[#212121] leading-[40px]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
           {totalRemaining}
         </span>
-        <span
-          className="text-[16px] font-normal text-[#625f64] leading-[27px]"
-          style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-        >
+        <span className="text-[16px] font-normal text-[#625f64] leading-[27px]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
           days remaining
         </span>
       </div>

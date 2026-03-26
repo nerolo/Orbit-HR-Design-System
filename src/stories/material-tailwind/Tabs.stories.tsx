@@ -4,6 +4,7 @@ import {
   TabsDefault, TabsWithIcon, TabsCustomAnimation,
   TransparentTabs, VerticalTabs, UnderlineTabs,
 } from './Tabs';
+import { Tabs, TabsHeader, TabsBody, Tab, TabPanel } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Tabs',
@@ -60,3 +61,11 @@ export const CustomAnimation: Story = { render: () => <TabsCustomAnimation /> };
 export const Transparent: Story = { render: () => <TransparentTabs /> };
 export const Vertical: Story = { render: () => <VerticalTabs /> };
 export const Underline: Story = { render: () => <UnderlineTabs /> };
+
+export const Playground: Story = {
+  render: (args: any) => <Tabs value="react" {...args}><TabsHeader><Tab value="react">React</Tab><Tab value="vue">Vue</Tab><Tab value="angular">Angular</Tab></TabsHeader><TabsBody><TabPanel value="react">React content.</TabPanel><TabPanel value="vue">Vue content.</TabPanel><TabPanel value="angular">Angular content.</TabPanel></TabsBody></Tabs>,
+  args: { orientation: 'horizontal' },
+  argTypes: {
+    orientation: { control: 'select', options: ['horizontal', 'vertical'] },
+  },
+};

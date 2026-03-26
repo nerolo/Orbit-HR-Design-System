@@ -4,6 +4,7 @@ import {
   MenuDefault, NestedMenu, MenuCustomAnimation, MenuCustomList,
   MenuDivider, MenuWithCheckbox, MenuWithSearchInput, NotificationsMenu,
 } from './Menu';
+import { Menu, MenuHandler, MenuList, MenuItem, Button } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Menu',
@@ -52,3 +53,11 @@ export const Divider: Story = { render: () => <MenuDivider /> };
 export const WithCheckbox: Story = { render: () => <MenuWithCheckbox /> };
 export const WithSearchInput: Story = { render: () => <MenuWithSearchInput /> };
 export const Notifications: Story = { render: () => <NotificationsMenu /> };
+
+export const Playground: Story = {
+  render: (args: any) => <Menu {...args}><MenuHandler><Button>Open Menu</Button></MenuHandler><MenuList><MenuItem>Menu Item 1</MenuItem><MenuItem>Menu Item 2</MenuItem><MenuItem>Menu Item 3</MenuItem></MenuList></Menu>,
+  args: { placement: 'bottom', offset: 5 },
+  argTypes: {
+    placement: { control: 'select', options: ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'right'] },
+  },
+};

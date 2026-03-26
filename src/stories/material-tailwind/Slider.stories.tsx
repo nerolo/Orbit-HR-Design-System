@@ -32,3 +32,5 @@ export function DefaultSlider() {
 export const Sizes: Story = { render: () => <SliderSizes /> };
 export const Colors: Story = { render: () => <SliderColors /> };
 export const CustomStyles: Story = { render: () => <SliderCustomStyles /> };
+
+export const Playground: Story = { render: () => <div className="w-64 p-4"><input type="range" min="0" max="100" defaultValue="50" className="w-full" /></div> };

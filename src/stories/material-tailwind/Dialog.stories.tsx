@@ -4,6 +4,7 @@ import {
   DialogDefault, DialogCustomAnimation, DialogWithForm,
   LongDialog, MessageDialog, AddProductDialog,
 } from './Dialog';
+import { Dialog, DialogHeader, DialogBody, DialogFooter, Button } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Dialog',
@@ -72,3 +73,23 @@ export const WithForm: Story = { render: () => <DialogWithForm /> };
 export const Long: Story = { render: () => <LongDialog /> };
 export const Message: Story = { render: () => <MessageDialog /> };
 export const AddProduct: Story = { render: () => <AddProductDialog /> };
+
+export const Playground: Story = {
+  render: (args: any) => {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open Dialog</Button>
+        <Dialog open={open} handler={() => setOpen(false)} {...args}>
+          <DialogHeader>Dialog Title</DialogHeader>
+          <DialogBody>Dialog body content.</DialogBody>
+          <DialogFooter><Button onClick={() => setOpen(false)}>Close</Button></DialogFooter>
+        </Dialog>
+      </>
+    );
+  },
+  args: { size: 'md' },
+  argTypes: {
+    size: { control: 'select', options: ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] },
+  },
+};

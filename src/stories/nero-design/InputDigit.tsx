@@ -1,36 +1,46 @@
 import React from 'react';
 
-export function InputDigitDefault() {
+export interface InputDigitProps {
+  label?: string;
+  value?: string;
+  isActive?: boolean;
+  disabled?: boolean;
+}
+
+export function InputDigitDefault({
+  label = 'Code',
+  value = '',
+  isActive = false,
+  disabled = false,
+}: InputDigitProps) {
+  const borderColor = isActive ? '#455a64' : '#fafafa';
   return (
     <div className="flex flex-col gap-1 items-center">
-      <label className="text-[12px] font-medium text-[#2d2a2b] leading-[21px] self-start" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
-        Code
-      </label>
+      {label && (
+        <label className="text-[12px] font-medium text-[#2d2a2b] leading-[21px] self-start" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
+          {label}
+        </label>
+      )}
       <input
         type="text"
         maxLength={1}
-        className="w-[60px] h-[70px] border border-[#fafafa] rounded-[8px] bg-[#fafafa] text-center text-[24px] font-medium text-[#2d2a2b] outline-none shadow-sm"
-        style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
+        defaultValue={value}
+        disabled={disabled}
+        className="w-[60px] h-[70px] rounded-[8px] bg-[#fafafa] text-center text-[24px] font-medium text-[#2d2a2b] outline-none"
+        style={{
+          fontFamily: 'Hanken Grotesk, sans-serif',
+          border: `1px solid ${borderColor}`,
+          boxShadow: isActive ? 'none' : '0 1px 2px rgba(0,0,0,0.05)',
+          opacity: disabled ? 0.5 : 1,
+          cursor: disabled ? 'not-allowed' : 'text',
+        }}
       />
     </div>
   );
 }
 
 export function InputDigitActive() {
-  return (
-    <div className="flex flex-col gap-1 items-center">
-      <label className="text-[12px] font-medium text-[#2d2a2b] leading-[21px] self-start" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
-        Code
-      </label>
-      <input
-        type="text"
-        maxLength={1}
-        defaultValue="4"
-        className="w-[60px] h-[70px] border border-[#455a64] rounded-[8px] bg-[#fafafa] text-center text-[24px] font-medium text-[#2d2a2b] outline-none"
-        style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-      />
-    </div>
-  );
+  return <InputDigitDefault label="Code" value="4" isActive={true} />;
 }
 
 export function InputDigitOTPRow() {
@@ -44,12 +54,12 @@ export function InputDigitOTPRow() {
             type="text"
             maxLength={1}
             defaultValue={i <= 2 ? String(i) : ''}
-            className={`w-[60px] h-[70px] rounded-[8px] bg-[#fafafa] text-center text-[24px] font-medium text-[#2d2a2b] outline-none ${
-              i === 3
-                ? 'border border-[#455a64]'
-                : 'border border-[#fafafa] shadow-sm'
-            }`}
-            style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
+            className="w-[60px] h-[70px] rounded-[8px] bg-[#fafafa] text-center text-[24px] font-medium text-[#2d2a2b] outline-none"
+            style={{
+              fontFamily: 'Hanken Grotesk, sans-serif',
+              border: i === 3 ? '1px solid #455a64' : '1px solid #fafafa',
+              boxShadow: i === 3 ? 'none' : '0 1px 2px rgba(0,0,0,0.05)',
+            }}
           />
         ))}
       </div>

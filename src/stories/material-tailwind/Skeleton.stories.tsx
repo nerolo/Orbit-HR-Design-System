@@ -48,3 +48,5 @@ export function DefaultSkeleton() {
 export const ImagePlaceholder: Story = { render: () => <ImagePlaceholderSkeleton /> };
 export const VideoPlaceholder: Story = { render: () => <VideoPlaceholderSkeleton /> };
 export const CardPlaceholder: Story = { render: () => <CardPlaceholderSkeleton /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">Skeleton is a layout component — see Default story for full example.</div> };

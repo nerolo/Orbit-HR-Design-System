@@ -99,3 +99,5 @@ export const WithCta: Story = { render: () => <SidebarWithCta /> };
 export const WithLogo: Story = { render: () => <SidebarWithLogo /> };
 export const WithSearch: Story = { render: () => <SidebarWithSearch /> };
 export const WithBurgerMenu: Story = { render: () => <SidebarWithBurgerMenu /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">Sidebar is a layout component — see Default story for full example.</div> };

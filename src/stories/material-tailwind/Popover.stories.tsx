@@ -4,6 +4,7 @@ import {
   PopoverDefault, PopoverPlacement, PopoverCustomAnimation,
   SubscriptionPopover, PopoverWithImage, ProfileInfoPopover,
 } from './Popover';
+import { Popover, PopoverHandler, PopoverContent, Button } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Popover',
@@ -47,3 +48,11 @@ export const CustomAnimation: Story = { render: () => <PopoverCustomAnimation />
 export const Subscription: Story = { render: () => <SubscriptionPopover /> };
 export const WithImage: Story = { render: () => <PopoverWithImage /> };
 export const ProfileInfo: Story = { render: () => <ProfileInfoPopover /> };
+
+export const Playground: Story = {
+  render: (args: any) => <Popover {...args}><PopoverHandler><Button>Open Popover</Button></PopoverHandler><PopoverContent><p className="w-48">Popover content here.</p></PopoverContent></Popover>,
+  args: { placement: 'top', offset: 5 },
+  argTypes: {
+    placement: { control: 'select', options: ['top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'right'] },
+  },
+};

@@ -4,6 +4,7 @@ import {
   ButtonGroupDefault, ButtonGroupVariants, ButtonGroupSizes, ButtonGroupColors,
   BlockLevelButtonGroup, ButtonGroupRippleEffect, ButtonGroupCustomStyles,
 } from './ButtonGroup';
+import { ButtonGroup, Button } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Button Group',
@@ -40,3 +41,13 @@ export const Colors: Story = { render: () => <ButtonGroupColors /> };
 export const BlockLevel: Story = { render: () => <BlockLevelButtonGroup /> };
 export const RippleEffect: Story = { render: () => <ButtonGroupRippleEffect /> };
 export const CustomStyles: Story = { render: () => <ButtonGroupCustomStyles /> };
+
+export const Playground: Story = {
+  render: (args: any) => <ButtonGroup {...args}><Button>One</Button><Button>Two</Button><Button>Three</Button></ButtonGroup>,
+  args: { variant: 'filled', size: 'md', color: 'blue' },
+  argTypes: {
+    variant: { control: 'select', options: ['filled', 'gradient', 'outlined', 'text'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    color: { control: 'select', options: ['blue', 'red', 'green', 'amber', 'gray'] },
+  },
+};

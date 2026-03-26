@@ -4,6 +4,7 @@ import {
   SwitchDefault, CheckedSwitch, SwitchColors, SwitchLabel,
   SwitchRippleEffect, SwitchDisabled, SwitchWithDescription, SwitchCustomStyles,
 } from './Switch';
+import { Switch } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Switch',
@@ -35,3 +36,14 @@ export const RippleEffect: Story = { render: () => <SwitchRippleEffect /> };
 export const Disabled: Story = { render: () => <SwitchDisabled /> };
 export const WithDescription: Story = { render: () => <SwitchWithDescription /> };
 export const CustomStyles: Story = { render: () => <SwitchCustomStyles /> };
+
+export const Playground: Story = {
+  render: (args) => <Switch {...args} />,
+  args: { color: 'blue', disabled: false, defaultChecked: false, label: 'Toggle' },
+  argTypes: {
+    color: { control: 'select', options: ['blue', 'red', 'green', 'amber', 'gray'] },
+    disabled: { control: 'boolean' },
+    defaultChecked: { control: 'boolean' },
+    label: { control: 'text' },
+  },
+};

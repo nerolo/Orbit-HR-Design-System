@@ -33,3 +33,5 @@ export const Readonly: Story = { render: () => <ReadonlyRating /> };
 export const CustomIcon: Story = { render: () => <CustomRatingIcon /> };
 export const WithText: Story = { render: () => <RatingWithText /> };
 export const WithComment: Story = { render: () => <RatingWithComment /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">RatingBar is a complex stateful component — see Default story for full example.</div> };

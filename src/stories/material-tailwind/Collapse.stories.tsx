@@ -1,5 +1,7 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CollapseDefault } from './Collapse';
+import { Collapse, Button } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Collapse',
@@ -48,4 +50,18 @@ export default function CollapseDefault() {
       },
     },
   },
+};
+
+export const Playground: Story = {
+  render: (args: any) => {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(!open)}>Toggle</Button>
+        <Collapse open={open} {...args}><div className="p-4 bg-blue-50">Collapsed content here.</div></Collapse>
+      </>
+    );
+  },
+  args: {},
+  argTypes: {},
 };

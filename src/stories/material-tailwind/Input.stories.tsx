@@ -5,6 +5,7 @@ import {
   InputIcon, InputWithHelperText, InputWithButton, InputDisabled,
   InputForDarkSurface, InputCustomStyles,
 } from './Input';
+import { Input } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Input',
@@ -43,3 +44,17 @@ export const WithButton: Story = { render: () => <InputWithButton /> };
 export const Disabled: Story = { render: () => <InputDisabled /> };
 export const ForDarkSurface: Story = { render: () => <InputForDarkSurface /> };
 export const CustomStyles: Story = { render: () => <InputCustomStyles /> };
+
+export const Playground: Story = {
+  render: (args: any) => <div className="w-72"><Input {...args} /></div>,
+  args: { label: 'Username', size: 'md', color: 'blue', variant: 'outlined', disabled: false, error: false, success: false },
+  argTypes: {
+    label: { control: 'text' },
+    size: { control: 'select', options: ['md', 'lg'] },
+    color: { control: 'select', options: ['blue', 'red', 'green', 'amber', 'gray'] },
+    variant: { control: 'select', options: ['outlined', 'standard', 'static'] },
+    disabled: { control: 'boolean' },
+    error: { control: 'boolean' },
+    success: { control: 'boolean' },
+  },
+};

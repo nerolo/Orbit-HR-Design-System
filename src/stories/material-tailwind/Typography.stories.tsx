@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   TypographyDefault, TypographyVariants, TypographyColors, TypographyGradientColor,
 } from './Typography';
+import { Typography } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Typography',
@@ -37,3 +38,13 @@ export function TypographyDefault() {
 export const Variants: Story = { render: () => <TypographyVariants /> };
 export const Colors: Story = { render: () => <TypographyColors /> };
 export const GradientColor: Story = { render: () => <TypographyGradientColor /> };
+
+export const Playground: Story = {
+  render: (args) => <Typography {...args} />,
+  args: { variant: 'h1', color: 'inherit', children: 'Material Tailwind' },
+  argTypes: {
+    variant: { control: 'select', options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'lead', 'paragraph', 'small'] },
+    color: { control: 'select', options: ['inherit', 'current', 'black', 'white', 'blue-gray', 'gray', 'brown', 'deep-orange', 'orange', 'amber', 'yellow', 'lime', 'light-green', 'green', 'teal', 'cyan', 'light-blue', 'blue', 'indigo', 'deep-purple', 'purple', 'pink', 'red'] },
+    children: { control: 'text' },
+  },
+};

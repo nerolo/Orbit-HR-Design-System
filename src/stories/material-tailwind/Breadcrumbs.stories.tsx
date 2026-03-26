@@ -4,6 +4,7 @@ import {
   BreadcrumbsDefault, BreadcrumbsWithIcon, BlockLevelBreadcrumbs,
   BreadcrumbsCustomSeparator, BreadcrumbsCustomStyles,
 } from './Breadcrumbs';
+import { Breadcrumbs } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Breadcrumbs',
@@ -42,3 +43,11 @@ export const WithIcon: Story = { render: () => <BreadcrumbsWithIcon /> };
 export const BlockLevel: Story = { render: () => <BlockLevelBreadcrumbs /> };
 export const CustomSeparator: Story = { render: () => <BreadcrumbsCustomSeparator /> };
 export const CustomStyles: Story = { render: () => <BreadcrumbsCustomStyles /> };
+
+export const Playground: Story = {
+  render: (args: any) => <Breadcrumbs {...args}><a href="#">Docs</a><a href="#">Components</a><a href="#">Breadcrumbs</a></Breadcrumbs>,
+  args: { separator: '/' },
+  argTypes: {
+    separator: { control: 'text' },
+  },
+};

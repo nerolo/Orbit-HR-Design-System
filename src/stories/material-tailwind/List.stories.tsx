@@ -4,6 +4,7 @@ import {
   ListDefault, ListWithAvatar, ListWithSelectedItem,
   ListWithDisabledItem, ListWithLink, ListWithBadge,
 } from './List';
+import { List, ListItem } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/List',
@@ -41,3 +42,9 @@ export const WithSelectedItem: Story = { render: () => <ListWithSelectedItem /> 
 export const WithDisabledItem: Story = { render: () => <ListWithDisabledItem /> };
 export const WithLink: Story = { render: () => <ListWithLink /> };
 export const WithBadge: Story = { render: () => <ListWithBadge /> };
+
+export const Playground: Story = {
+  render: (args: any) => <List {...args}><ListItem>Item 1</ListItem><ListItem>Item 2</ListItem><ListItem>Item 3</ListItem></List>,
+  args: {},
+  argTypes: {},
+};

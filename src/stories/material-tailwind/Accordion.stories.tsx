@@ -9,6 +9,7 @@ import {
   AccordionCustomStyles,
   AccordionDisabled,
 } from './Accordion';
+import { Accordion, AccordionHeader, AccordionBody } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Accordion',
@@ -79,3 +80,23 @@ export const CustomIcon: Story = { render: () => <AccordionCustomIcon /> };
 export const CustomAnimation: Story = { render: () => <AccordionCustomAnimation /> };
 export const CustomStyles: Story = { render: () => <AccordionCustomStyles /> };
 export const Disabled: Story = { render: () => <AccordionDisabled /> };
+
+export const Playground: Story = {
+  render: (args: any) => {
+    const [open, setOpen] = React.useState(1);
+    return (
+      <>
+        <Accordion open={open === 1} {...args}>
+          <AccordionHeader onClick={() => setOpen(open === 1 ? 0 : 1)}>What is Material Tailwind?</AccordionHeader>
+          <AccordionBody>Material Tailwind is a framework that enhances Tailwind CSS with beautiful components.</AccordionBody>
+        </Accordion>
+        <Accordion open={open === 2}>
+          <AccordionHeader onClick={() => setOpen(open === 2 ? 0 : 2)}>How to use Material Tailwind?</AccordionHeader>
+          <AccordionBody>Install it via npm, import components, and use them in your JSX.</AccordionBody>
+        </Accordion>
+      </>
+    );
+  },
+  args: {},
+  argTypes: {},
+};

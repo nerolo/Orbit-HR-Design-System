@@ -7,6 +7,28 @@ const meta = {
   component: LeaveBalanceCard,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
+  args: {
+    annualUsed: 12,
+    annualTotal: 15,
+    sickUsed: 2,
+    sickTotal: 2,
+    casualUsed: 0,
+    casualTotal: 5,
+    maternityUsed: 10,
+    maternityTotal: 10,
+    unpaidUsed: 1,
+  },
+  argTypes: {
+    annualUsed:     { control: { type: 'number', min: 0 } },
+    annualTotal:    { control: { type: 'number', min: 1 } },
+    sickUsed:       { control: { type: 'number', min: 0 } },
+    sickTotal:      { control: { type: 'number', min: 1 } },
+    casualUsed:     { control: { type: 'number', min: 0 } },
+    casualTotal:    { control: { type: 'number', min: 1 } },
+    maternityUsed:  { control: { type: 'number', min: 0 } },
+    maternityTotal: { control: { type: 'number', min: 1 } },
+    unpaidUsed:     { control: { type: 'number', min: 0 } },
+  },
 } satisfies Meta<typeof LeaveBalanceCard>;
 
 export default meta;

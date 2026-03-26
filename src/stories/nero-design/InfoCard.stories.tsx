@@ -4,15 +4,31 @@ import { InfoCardSingle, InfoCardTwoSlot, InfoCardHorizontal, InfoCardAllVariant
 
 const meta = {
   title: 'Nero design/Info Card',
-  component: InfoCardAllVariants,
+  component: InfoCardSingle,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
-} satisfies Meta<typeof InfoCardAllVariants>;
+  args: {
+    title: 'Total Employees',
+    value: 245,
+    valueLabel: 'active',
+    meta: 'Across all locations',
+    layout: 'single',
+    icon: 'chart',
+  },
+  argTypes: {
+    title: { control: 'text' },
+    value: { control: 'text' },
+    valueLabel: { control: 'text' },
+    meta: { control: 'text' },
+    layout: { control: 'select', options: ['single', 'horizontal'] },
+    icon: { control: 'select', options: ['chart', 'calendar', 'clock'] },
+  },
+} satisfies Meta<typeof InfoCardSingle>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const AllVariants: Story = {
+export const SingleData: Story = {
   parameters: {
     docs: {
       source: {
@@ -52,6 +68,6 @@ export const AllVariants: Story = {
     },
   },
 };
-export const SingleData: Story = { render: () => <InfoCardSingle /> };
 export const TwoSlots: Story = { render: () => <InfoCardTwoSlot /> };
 export const Horizontal: Story = { render: () => <InfoCardHorizontal /> };
+export const AllVariants: Story = { render: () => <InfoCardAllVariants /> };

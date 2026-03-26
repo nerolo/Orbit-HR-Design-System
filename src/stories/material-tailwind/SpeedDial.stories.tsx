@@ -69,3 +69,5 @@ export const Controlled: Story = { render: () => <ControlledSpeedDial /> };
 export const WithTextInside: Story = { render: () => <SpeedDialWithTextInside /> };
 export const WithTextOutside: Story = { render: () => <SpeedDialWithTextOutside /> };
 export const Custom: Story = { render: () => <CustomSpeedDial /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">SpeedDial is a stateful component — see Default story for full example.</div> };

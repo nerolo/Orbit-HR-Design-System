@@ -4,6 +4,7 @@ import {
   ButtonDefault, ButtonVariants, ButtonSizes, ButtonColors, ButtonLoading,
   BlockLevelButton, ButtonRounded, ButtonWithIcon, ButtonRippleEffect,
 } from './Button';
+import { Button } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Button',
@@ -36,3 +37,14 @@ export const BlockLevel: Story = { render: () => <BlockLevelButton /> };
 export const Rounded: Story = { render: () => <ButtonRounded /> };
 export const WithIcon: Story = { render: () => <ButtonWithIcon /> };
 export const RippleEffect: Story = { render: () => <ButtonRippleEffect /> };
+
+export const Playground: Story = {
+  render: (args) => <Button {...args} />,
+  args: { variant: 'filled', size: 'md', color: 'blue', children: 'Button' },
+  argTypes: {
+    variant: { control: 'select', options: ['filled', 'gradient', 'outlined', 'text'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    color: { control: 'select', options: ['blue', 'red', 'green', 'amber', 'gray'] },
+    children: { control: 'text' },
+  },
+};

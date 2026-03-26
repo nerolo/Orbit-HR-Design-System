@@ -5,6 +5,7 @@ import {
   CheckboxRippleEffect, DisabledCheckbox, CheckboxWithLink, CheckboxWithDescription,
   CheckboxVerticalListGroup, CheckboxHorizontalListGroup, CheckboxCustomStyles,
 } from './Checkbox';
+import { Checkbox } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Checkbox',
@@ -39,3 +40,14 @@ export const WithDescription: Story = { render: () => <CheckboxWithDescription /
 export const VerticalList: Story = { render: () => <CheckboxVerticalListGroup /> };
 export const HorizontalList: Story = { render: () => <CheckboxHorizontalListGroup /> };
 export const CustomStyles: Story = { render: () => <CheckboxCustomStyles /> };
+
+export const Playground: Story = {
+  render: (args: any) => <Checkbox {...args} />,
+  args: { label: 'Remember Me', color: 'blue', disabled: false, defaultChecked: false },
+  argTypes: {
+    label: { control: 'text' },
+    color: { control: 'select', options: ['blue', 'red', 'green', 'amber', 'gray'] },
+    disabled: { control: 'boolean' },
+    defaultChecked: { control: 'boolean' },
+  },
+};

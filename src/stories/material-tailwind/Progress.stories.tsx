@@ -4,6 +4,7 @@ import {
   ProgressDefault, ProgressVariants, ProgressSizes, ProgressColors,
   ProgressLabel, ProgressSizesLabel, ProgressLabelOutside, ProgressCustomStyles,
 } from './Progress';
+import { Progress } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Progress Bar',
@@ -35,3 +36,14 @@ export const Label: Story = { render: () => <ProgressLabel /> };
 export const SizesWithLabel: Story = { render: () => <ProgressSizesLabel /> };
 export const LabelOutside: Story = { render: () => <ProgressLabelOutside /> };
 export const CustomStyles: Story = { render: () => <ProgressCustomStyles /> };
+
+export const Playground: Story = {
+  render: (args) => <Progress {...args} />,
+  args: { value: 50, color: 'blue', size: 'md', variant: 'filled', label: 'completed' },
+  argTypes: {
+    value: { control: { type: 'range', min: 0, max: 100, step: 1 } },
+    color: { control: 'select', options: ['blue', 'red', 'green', 'amber', 'gray'] },
+    size: { control: 'select', options: ['sm', 'md', 'lg'] },
+    variant: { control: 'select', options: ['filled', 'gradient'] },
+  },
+};

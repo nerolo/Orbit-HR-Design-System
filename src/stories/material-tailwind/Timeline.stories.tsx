@@ -84,3 +84,5 @@ export function DefaultTimeline() {
 export const WithIcon: Story = { render: () => <TimelineWithIcon /> };
 export const WithAvatar: Story = { render: () => <TimelineWithAvatar /> };
 export const Activities: Story = { render: () => <ActivitiesTimeline /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">Timeline is a layout component — see Default story for full example.</div> };

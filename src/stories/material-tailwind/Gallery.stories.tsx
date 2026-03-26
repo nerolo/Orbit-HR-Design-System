@@ -52,3 +52,5 @@ export const FeaturedImage: Story = { render: () => <FeaturedImageGallery /> };
 export const Quad: Story = { render: () => <QuadGallery /> };
 export const WithCarousel: Story = { render: () => <GalleryWithCarousel /> };
 export const WithTab: Story = { render: () => <GalleryWithTab /> };
+
+export const Playground: Story = { render: () => <div className="p-4 text-gray-500">Gallery is a layout component — see Default story for full example.</div> };

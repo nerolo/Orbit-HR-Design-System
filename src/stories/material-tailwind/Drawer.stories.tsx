@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   DrawerDefault, DrawerPlacement, DrawerWithNavigation, DrawerWithForm,
 } from './Drawer';
+import { Drawer, Button } from '@material-tailwind/react';
 
 const meta = {
   title: 'Material Tailwind/Drawer',
@@ -78,3 +79,22 @@ export function DrawerDefault() {
 export const Placement: Story = { render: () => <DrawerPlacement /> };
 export const WithNavigation: Story = { render: () => <DrawerWithNavigation /> };
 export const WithForm: Story = { render: () => <DrawerWithForm /> };
+
+export const Playground: Story = {
+  render: (args: any) => {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <>
+        <Button onClick={() => setOpen(true)}>Open Drawer</Button>
+        <Drawer open={open} onClose={() => setOpen(false)} {...args}>
+          <div className="p-4"><p>Drawer content here.</p></div>
+        </Drawer>
+      </>
+    );
+  },
+  args: { placement: 'left', size: 300 },
+  argTypes: {
+    placement: { control: 'select', options: ['left', 'right', 'top', 'bottom'] },
+    size: { control: 'number' },
+  },
+};
