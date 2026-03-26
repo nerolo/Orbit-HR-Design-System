@@ -19,6 +19,8 @@ export interface ReceiptRow {
 export interface ExpenseTableProps {
   title?: string;
   rows?: ReceiptRow[];
+  onDeleteRow?: (id: number) => void;
+  onCopyRow?: (id: number) => void;
 }
 
 const STATUS_STYLES: Record<ReceiptStatus, { bg: string; text: string; label: string }> = {
@@ -40,12 +42,73 @@ function StatusBadge({ status }: { status: ReceiptStatus }) {
   );
 }
 
-function TableInput({ placeholder }: { placeholder: string }) {
+function CalendarIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bdbdbd" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="4" width="18" height="18" rx="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+    </svg>
+  );
+}
+
+function ChevronIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bdbdbd" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
+  );
+}
+
+function TrashIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9e9e9e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="3 6 5 6 21 6" />
+      <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+      <path d="M10 11v6M14 11v6" />
+      <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+    </svg>
+  );
+}
+
+function CopyIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9e9e9e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="9" y="9" width="13" height="13" rx="2" />
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+    </svg>
+  );
+}
+
+function DateInput({ placeholder = 'Date' }: { placeholder?: string }) {
+  return (
+    <div className="flex items-center border border-[#b0bec5] rounded-[8px] px-3 h-[42px] bg-transparent gap-2 w-full">
+      <span className="flex-1 text-[14px] text-[#bdbdbd]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
+        {placeholder}
+      </span>
+      <CalendarIcon />
+    </div>
+  );
+}
+
+function SelectInput({ placeholder }: { placeholder: string }) {
+  return (
+    <div className="flex items-center border border-[#b0bec5] rounded-[8px] px-3 h-[42px] bg-transparent gap-2 w-full">
+      <span className="flex-1 text-[14px] text-[#bdbdbd] whitespace-nowrap" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
+        {placeholder}
+      </span>
+      <ChevronIcon />
+    </div>
+  );
+}
+
+function TextInput({ placeholder }: { placeholder: string }) {
   return (
     <input
       type="text"
       placeholder={placeholder}
-      className="w-full border border-[#b0bec5] rounded-[8px] px-3 py-2 text-[14px] text-[#2d2a2b] bg-transparent outline-none placeholder-[#bdbdbd] h-[42px]"
+      className="w-full border border-[#b0bec5] rounded-[8px] px-3 h-[42px] text-[14px] text-[#2d2a2b] bg-transparent outline-none placeholder-[#bdbdbd]"
       style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
     />
   );
@@ -70,22 +133,25 @@ const defaultRows: ReceiptRow[] = [
 ];
 
 const HEADERS = [
-  { label: 'Image',            width: 'w-[107px]' },
-  { label: 'Status',           width: 'w-[122px]' },
-  { label: 'Transaction Date', width: 'w-[213px]' },
-  { label: 'Currency',         width: 'w-[130px]' },
-  { label: 'Amount',           width: 'w-[130px]' },
-  { label: 'Cost Department',  width: 'w-[195px]' },
-  { label: 'Cost Location',    width: 'w-[145px]' },
+  { label: 'Image',            width: 'w-[109px]' },
+  { label: 'Status',           width: 'w-[110px]' },
+  { label: 'Transaction Date', width: 'w-[230px]' },
+  { label: 'Currency',         width: 'w-[140px]' },
+  { label: 'Amount',           width: 'w-[136px]' },
+  { label: 'Cost Department',  width: 'w-[204px]' },
+  { label: 'Cost Location',    width: 'w-[159px]' },
   { label: 'Cost Description', width: 'w-[300px]' },
   { label: 'Remarks',          width: 'w-[300px]' },
-  { label: 'Account Code',     width: 'w-[180px]' },
-  { label: 'File Name',        width: 'w-[130px]' },
+  { label: 'Account Code',     width: 'w-[232px]' },
+  { label: 'File Name',        width: 'w-[169px]' },
+  { label: '',                 width: 'w-[80px]'  },
 ];
 
 export function ExpenseTable({
   title = 'Scanned Receipt Details',
   rows = defaultRows,
+  onDeleteRow,
+  onCopyRow,
 }: ExpenseTableProps) {
   return (
     <div
@@ -108,9 +174,9 @@ export function ExpenseTable({
           {/* Header */}
           <thead>
             <tr className="border-b border-[#f0f0f0]">
-              {HEADERS.map((h) => (
+              {HEADERS.map((h, i) => (
                 <th
-                  key={h.label}
+                  key={i}
                   className={`${h.width} h-[50px] px-3 text-left text-[12px] font-normal text-[#757575] whitespace-nowrap`}
                 >
                   {h.label}
@@ -140,28 +206,28 @@ export function ExpenseTable({
                 </td>
 
                 {/* Transaction Date */}
-                <td className="px-2 py-3 align-middle">
-                  <TableInput placeholder="Date" />
+                <td className="px-2 py-3 align-middle w-[230px]">
+                  <DateInput />
                 </td>
 
-                {/* Currency */}
+                {/* Currency — dropdown */}
                 <td className="px-2 py-3 align-middle">
-                  <TableInput placeholder="Currency" />
+                  <SelectInput placeholder="Currency" />
                 </td>
 
                 {/* Amount */}
                 <td className="px-2 py-3 align-middle">
-                  <TableInput placeholder="Amount" />
+                  <TextInput placeholder="Amount" />
                 </td>
 
-                {/* Cost Department */}
+                {/* Cost Department — dropdown */}
                 <td className="px-2 py-3 align-middle">
-                  <TableInput placeholder="Cost Department" />
+                  <SelectInput placeholder="Cost Department" />
                 </td>
 
-                {/* Cost Location */}
+                {/* Cost Location — dropdown */}
                 <td className="px-2 py-3 align-middle">
-                  <TableInput placeholder="Cost Location" />
+                  <SelectInput placeholder="Cost Location" />
                 </td>
 
                 {/* Cost Description */}
@@ -176,7 +242,7 @@ export function ExpenseTable({
 
                 {/* Account Code */}
                 <td className="px-3 py-3 align-middle">
-                  <TableInput placeholder="Account Code" />
+                  <TextInput placeholder="Account Code" />
                 </td>
 
                 {/* File Name */}
@@ -184,6 +250,28 @@ export function ExpenseTable({
                   <span className="text-[14px] text-[#424242] whitespace-nowrap">
                     {row.fileName ?? 'receipt.jpg'}
                   </span>
+                </td>
+
+                {/* Actions */}
+                <td className="px-3 py-4 align-middle">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => onDeleteRow?.(row.id)}
+                      className="flex items-center justify-center w-8 h-8 rounded-[4px] bg-[#f5f5f5] hover:bg-[#ffebee] transition-colors"
+                      style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)' }}
+                      title="Delete row"
+                    >
+                      <TrashIcon />
+                    </button>
+                    <button
+                      onClick={() => onCopyRow?.(row.id)}
+                      className="flex items-center justify-center w-8 h-8 rounded-[4px] bg-[#f5f5f5] hover:bg-[#e3f2fd] transition-colors"
+                      style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)' }}
+                      title="Duplicate row"
+                    >
+                      <CopyIcon />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
