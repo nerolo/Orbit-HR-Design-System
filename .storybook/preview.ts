@@ -4,6 +4,11 @@ import '../src/tailwind.css';
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: ['Nero design', 'Material Tailwind', '*'],
+      },
+    },
     layout: 'fullscreen',
     controls: {
       matchers: {
