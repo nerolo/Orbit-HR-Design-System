@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ExpenseTable, ExpenseTableOnBackground } from './ExpenseTable';
+import { ExpenseTable, ExpenseTableOnBackground, ExpenseTableFinanceOnBackground } from './ExpenseTable';
 
 const meta = {
   title: 'Nero design/Expense Table',
@@ -12,6 +12,7 @@ const meta = {
   },
   argTypes: {
     title: { control: 'text' },
+    variant: { control: 'select', options: ['staff', 'finance'] },
   },
 } satisfies Meta<typeof ExpenseTable>;
 
@@ -188,3 +189,5 @@ export function ExpenseTable({ title = 'Scanned Receipt Details', rows = default
   },
 };
 export const OnBackground: Story = { render: () => <ExpenseTableOnBackground /> };
+export const Finance: Story = { args: { variant: 'finance' } };
+export const FinanceOnBackground: Story = { render: () => <ExpenseTableFinanceOnBackground /> };

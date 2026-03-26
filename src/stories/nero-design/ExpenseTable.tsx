@@ -1,14 +1,18 @@
 import React from 'react';
+import { ApprovalButton, ApprovalStatus } from './ApprovalButton';
 
 export type ReceiptStatus = 'Approved' | 'Rejected' | 'Return' | 'Pending';
 
 export interface ReceiptRow {
   id: number;
   status: ReceiptStatus;
+  approvalStatus?: ApprovalStatus;
   date?: string;
   currency?: string;
   amount?: string;
+  amountError?: string;
   costDept?: string;
+  staffName?: string;
   costLocation?: string;
   costDescription?: string;
   remarks?: string;
@@ -19,8 +23,11 @@ export interface ReceiptRow {
 export interface ExpenseTableProps {
   title?: string;
   rows?: ReceiptRow[];
+  variant?: 'staff' | 'finance';
   onDeleteRow?: (id: number) => void;
   onCopyRow?: (id: number) => void;
+  onApprove?: (id: number) => void;
+  onReturn?: (id: number) => void;
 }
 
 const STATUS_STYLES: Record<ReceiptStatus, { bg: string; text: string; label: string }> = {
@@ -103,14 +110,23 @@ function SelectInput({ placeholder }: { placeholder: string }) {
   );
 }
 
-function TextInput({ placeholder }: { placeholder: string }) {
+function TextInput({ placeholder, error }: { placeholder: string; error?: string }) {
   return (
-    <input
-      type="text"
-      placeholder={placeholder}
-      className="w-full border border-[#b0bec5] rounded-[8px] px-3 h-[42px] text-[14px] text-[#2d2a2b] bg-transparent outline-none placeholder-[#bdbdbd]"
-      style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
-    />
+    <div className="flex flex-col gap-1">
+      <input
+        type="text"
+        placeholder={placeholder}
+        className={`w-full border rounded-[8px] px-3 h-[42px] text-[14px] text-[#2d2a2b] bg-transparent outline-none placeholder-[#bdbdbd] ${
+          error ? 'border-[#e57373]' : 'border-[#b0bec5]'
+        }`}
+        style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}
+      />
+      {error && (
+        <span className="text-[11px] text-[#e57373]" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
+          {error}
+        </span>
+      )}
+    </div>
   );
 }
 
@@ -125,14 +141,21 @@ function TableTextarea({ placeholder }: { placeholder: string }) {
   );
 }
 
-const defaultRows: ReceiptRow[] = [
+const defaultStaffRows: ReceiptRow[] = [
   { id: 1, status: 'Pending',  fileName: 'receipt.jpg' },
   { id: 2, status: 'Return',   fileName: 'receipt.jpg' },
   { id: 3, status: 'Rejected', fileName: 'receipt.jpg' },
   { id: 4, status: 'Approved', fileName: 'receipt.jpg' },
 ];
 
-const HEADERS = [
+const defaultFinanceRows: ReceiptRow[] = [
+  { id: 1, status: 'Pending',  approvalStatus: 'default',  fileName: 'receipt.jpg' },
+  { id: 2, status: 'Return',   approvalStatus: 'returned', fileName: 'receipt.jpg', currency: 'CNY', amount: '180', amountError: 'exceeds limit' },
+  { id: 3, status: 'Rejected', approvalStatus: 'default',  fileName: 'receipt.jpg' },
+  { id: 4, status: 'Approved', approvalStatus: 'approved', fileName: 'receipt.jpg' },
+];
+
+const STAFF_HEADERS = [
   { label: 'Image',            width: 'w-[109px]' },
   { label: 'Status',           width: 'w-[110px]' },
   { label: 'Transaction Date', width: 'w-[230px]' },
@@ -147,12 +170,36 @@ const HEADERS = [
   { label: '',                 width: 'w-[80px]'  },
 ];
 
+const FINANCE_HEADERS = [
+  { label: 'Approved',         width: 'w-[120px]' },
+  { label: 'Image',            width: 'w-[109px]' },
+  { label: 'Status',           width: 'w-[110px]' },
+  { label: 'Transaction Date', width: 'w-[230px]' },
+  { label: 'Currency',         width: 'w-[140px]' },
+  { label: 'Amount',           width: 'w-[136px]' },
+  { label: 'Cost Department',  width: 'w-[204px]' },
+  { label: 'Staff Name',       width: 'w-[159px]' },
+  { label: 'Cost Location',    width: 'w-[159px]' },
+  { label: 'Cost Description', width: 'w-[300px]' },
+  { label: 'Remarks',          width: 'w-[300px]' },
+  { label: 'Account Code',     width: 'w-[232px]' },
+  { label: 'File Name',        width: 'w-[169px]' },
+];
+
 export function ExpenseTable({
   title = 'Scanned Receipt Details',
-  rows = defaultRows,
+  rows,
+  variant = 'staff',
   onDeleteRow,
   onCopyRow,
+  onApprove,
+  onReturn,
 }: ExpenseTableProps) {
+  const isFinance = variant === 'finance';
+  const headers = isFinance ? FINANCE_HEADERS : STAFF_HEADERS;
+  const defaultRows = isFinance ? defaultFinanceRows : defaultStaffRows;
+  const displayRows = rows ?? defaultRows;
+
   return (
     <div
       className="bg-[#f8f8f8] rounded-[2px] overflow-auto"
@@ -174,7 +221,7 @@ export function ExpenseTable({
           {/* Header */}
           <thead>
             <tr className="border-b border-[#f0f0f0]">
-              {HEADERS.map((h, i) => (
+              {headers.map((h, i) => (
                 <th
                   key={i}
                   className={`${h.width} h-[50px] px-3 text-left text-[12px] font-normal text-[#757575] whitespace-nowrap`}
@@ -187,8 +234,21 @@ export function ExpenseTable({
 
           {/* Body */}
           <tbody>
-            {rows.map((row) => (
+            {displayRows.map((row) => (
               <tr key={row.id} className="border-b border-[#f5f5f5] last:border-0">
+
+                {/* Finance: Approval column */}
+                {isFinance && (
+                  <td className="px-3 py-4 align-middle">
+                    <ApprovalButton
+                      size="mini"
+                      status={row.approvalStatus ?? 'default'}
+                      onApprove={() => onApprove?.(row.id)}
+                      onReturn={() => onReturn?.(row.id)}
+                    />
+                  </td>
+                )}
+
                 {/* Receipt image placeholder */}
                 <td className="p-3 align-middle">
                   <div className="w-[75px] h-[100px] rounded-[6px] bg-[#e8e0d8] border border-[#efebe7] flex items-center justify-center">
@@ -217,13 +277,20 @@ export function ExpenseTable({
 
                 {/* Amount */}
                 <td className="px-2 py-3 align-middle">
-                  <TextInput placeholder="Amount" />
+                  <TextInput placeholder="Amount" error={row.amountError} />
                 </td>
 
                 {/* Cost Department — dropdown */}
                 <td className="px-2 py-3 align-middle">
                   <SelectInput placeholder="Cost Department" />
                 </td>
+
+                {/* Finance: Staff Name — dropdown */}
+                {isFinance && (
+                  <td className="px-2 py-3 align-middle">
+                    <SelectInput placeholder="Staff Name" />
+                  </td>
+                )}
 
                 {/* Cost Location — dropdown */}
                 <td className="px-2 py-3 align-middle">
@@ -252,27 +319,30 @@ export function ExpenseTable({
                   </span>
                 </td>
 
-                {/* Actions */}
-                <td className="px-3 py-4 align-middle">
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => onDeleteRow?.(row.id)}
-                      className="flex items-center justify-center w-8 h-8 rounded-full bg-[#f5f5f5] text-[#212121] hover:bg-[#f1528b] hover:text-white transition-colors"
-                      style={{ boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.1)' }}
-                      title="Delete row"
-                    >
-                      <TrashIcon />
-                    </button>
-                    <button
-                      onClick={() => onCopyRow?.(row.id)}
-                      className="flex items-center justify-center w-8 h-8 rounded-full bg-[#f5f5f5] text-[#212121] hover:bg-[#f1528b] hover:text-white transition-colors"
-                      style={{ boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.1)' }}
-                      title="Duplicate row"
-                    >
-                      <CopyIcon />
-                    </button>
-                  </div>
-                </td>
+                {/* Staff: Actions column */}
+                {!isFinance && (
+                  <td className="px-3 py-4 align-middle">
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => onDeleteRow?.(row.id)}
+                        className="flex items-center justify-center w-8 h-8 rounded-full bg-[#f5f5f5] text-[#212121] hover:bg-[#f1528b] hover:text-white transition-colors"
+                        style={{ boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.1)' }}
+                        title="Delete row"
+                      >
+                        <TrashIcon />
+                      </button>
+                      <button
+                        onClick={() => onCopyRow?.(row.id)}
+                        className="flex items-center justify-center w-8 h-8 rounded-full bg-[#f5f5f5] text-[#212121] hover:bg-[#f1528b] hover:text-white transition-colors"
+                        style={{ boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.1)' }}
+                        title="Duplicate row"
+                      >
+                        <CopyIcon />
+                      </button>
+                    </div>
+                  </td>
+                )}
+
               </tr>
             ))}
           </tbody>
@@ -286,6 +356,14 @@ export function ExpenseTableOnBackground() {
   return (
     <div className="p-6 bg-[#f4f2f1]">
       <ExpenseTable />
+    </div>
+  );
+}
+
+export function ExpenseTableFinanceOnBackground() {
+  return (
+    <div className="p-6 bg-[#f4f2f1]">
+      <ExpenseTable variant="finance" />
     </div>
   );
 }
