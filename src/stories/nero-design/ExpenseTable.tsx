@@ -63,7 +63,7 @@ function ChevronIcon() {
 
 function TrashIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9e9e9e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="3 6 5 6 21 6" />
       <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
       <path d="M10 11v6M14 11v6" />
@@ -74,7 +74,7 @@ function TrashIcon() {
 
 function CopyIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9e9e9e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <rect x="9" y="9" width="13" height="13" rx="2" />
       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
     </svg>
@@ -257,16 +257,16 @@ export function ExpenseTable({
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => onDeleteRow?.(row.id)}
-                      className="flex items-center justify-center w-8 h-8 rounded-[4px] bg-[#f5f5f5] hover:bg-[#ffebee] transition-colors"
-                      style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)' }}
+                      className="flex items-center justify-center w-8 h-8 rounded-[8px] bg-white border border-[#e0e0e0] text-[#9e9e9e] hover:bg-[#f1528b] hover:border-[#f1528b] hover:text-white transition-colors"
+                      style={{ boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.06)' }}
                       title="Delete row"
                     >
                       <TrashIcon />
                     </button>
                     <button
                       onClick={() => onCopyRow?.(row.id)}
-                      className="flex items-center justify-center w-8 h-8 rounded-[4px] bg-[#f5f5f5] hover:bg-[#e3f2fd] transition-colors"
-                      style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)' }}
+                      className="flex items-center justify-center w-8 h-8 rounded-[8px] bg-white border border-[#e0e0e0] text-[#9e9e9e] hover:bg-[#f1528b] hover:border-[#f1528b] hover:text-white transition-colors"
+                      style={{ boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.06)' }}
                       title="Duplicate row"
                     >
                       <CopyIcon />
