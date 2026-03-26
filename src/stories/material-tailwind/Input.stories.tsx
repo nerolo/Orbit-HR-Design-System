@@ -16,7 +16,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Input } from "@material-tailwind/react";
+
+export function InputDefault() {
+  return (
+    <div className="w-72">
+      <Input label="Username" />
+    </div>
+  );
+}`,
+      },
+    },
+  },
+};
 export const Variants: Story = { render: () => <InputVariants /> };
 export const Sizes: Story = { render: () => <InputSizes /> };
 export const Colors: Story = { render: () => <InputColors /> };

@@ -12,7 +12,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Slider } from "@material-tailwind/react";
+
+export function DefaultSlider() {
+  return (
+    <div className="w-96">
+      <Slider defaultValue={50} />
+    </div>
+  );
+}`,
+      },
+    },
+  },
+};
 export const Sizes: Story = { render: () => <SliderSizes /> };
 export const Colors: Story = { render: () => <SliderColors /> };
 export const CustomStyles: Story = { render: () => <SliderCustomStyles /> };

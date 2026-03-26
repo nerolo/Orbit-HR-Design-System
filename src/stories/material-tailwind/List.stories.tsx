@@ -15,7 +15,27 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { List, ListItem, Card } from "@material-tailwind/react";
+
+export function ListDefault() {
+  return (
+    <Card className="w-96">
+      <List>
+        <ListItem>Inbox</ListItem>
+        <ListItem>Trash</ListItem>
+        <ListItem>Settings</ListItem>
+      </List>
+    </Card>
+  );
+}`,
+      },
+    },
+  },
+};
 export const WithAvatar: Story = { render: () => <ListWithAvatar /> };
 export const WithSelectedItem: Story = { render: () => <ListWithSelectedItem /> };
 export const WithDisabledItem: Story = { render: () => <ListWithDisabledItem /> };

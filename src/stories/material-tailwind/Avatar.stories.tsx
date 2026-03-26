@@ -15,7 +15,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Avatar } from "@material-tailwind/react";
+
+export function AvatarDefault() {
+  return <Avatar src="https://docs.material-tailwind.com/img/face-2.jpg" alt="avatar" />;
+}`,
+      },
+    },
+  },
+};
 export const Variants: Story = { render: () => <AvatarVariants /> };
 export const Sizes: Story = { render: () => <AvatarSizes /> };
 export const WithBorder: Story = { render: () => <AvatarWithBorder /> };

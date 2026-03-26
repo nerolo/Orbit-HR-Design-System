@@ -15,7 +15,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Alert } from "@material-tailwind/react";
+
+export function AlertDefault() {
+  return <Alert>A simple alert for showing message.</Alert>;
+}`,
+      },
+    },
+  },
+};
 export const Variants: Story = { render: () => <AlertVariants /> };
 export const Colors: Story = { render: () => <AlertColors /> };
 export const Icon: Story = { render: () => <AlertIcon /> };

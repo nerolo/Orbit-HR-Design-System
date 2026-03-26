@@ -15,7 +15,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Chip } from "@material-tailwind/react";
+
+export function ChipDefault() {
+  return <Chip value="chip" />;
+}`,
+      },
+    },
+  },
+};
 export const Variants: Story = { render: () => <ChipVariants /> };
 export const Sizes: Story = { render: () => <ChipSizes /> };
 export const Colors: Story = { render: () => <ChipColors /> };

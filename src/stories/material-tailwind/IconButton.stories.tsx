@@ -15,7 +15,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { IconButton } from "@material-tailwind/react";
+
+export function IconButtonDefault() {
+  return (
+    <IconButton>
+      <i className="fas fa-heart" />
+    </IconButton>
+  );
+}`,
+      },
+    },
+  },
+};
 export const Variants: Story = { render: () => <IconButtonVariants /> };
 export const Sizes: Story = { render: () => <IconButtonSizes /> };
 export const Colors: Story = { render: () => <IconButtonColors /> };

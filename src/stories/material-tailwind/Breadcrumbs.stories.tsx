@@ -15,7 +15,29 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Breadcrumbs } from "@material-tailwind/react";
+
+export function BreadcrumbsDefault() {
+  return (
+    <Breadcrumbs>
+      <a href="#" className="opacity-60">
+        Docs
+      </a>
+      <a href="#" className="opacity-60">
+        Components
+      </a>
+      <a href="#">Breadcrumbs</a>
+    </Breadcrumbs>
+  );
+}`,
+      },
+    },
+  },
+};
 export const WithIcon: Story = { render: () => <BreadcrumbsWithIcon /> };
 export const BlockLevel: Story = { render: () => <BlockLevelBreadcrumbs /> };
 export const CustomSeparator: Story = { render: () => <BreadcrumbsCustomSeparator /> };

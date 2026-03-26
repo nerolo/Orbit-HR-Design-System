@@ -15,7 +15,33 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import {
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+  Button,
+} from "@material-tailwind/react";
+
+export function PopoverDefault() {
+  return (
+    <Popover>
+      <PopoverHandler>
+        <Button>Popover</Button>
+      </PopoverHandler>
+      <PopoverContent>
+        This is a very beautiful popover, show some love.
+      </PopoverContent>
+    </Popover>
+  );
+}`,
+      },
+    },
+  },
+};
 export const Placement: Story = { render: () => <PopoverPlacement /> };
 export const CustomAnimation: Story = { render: () => <PopoverCustomAnimation /> };
 export const Subscription: Story = { render: () => <SubscriptionPopover /> };

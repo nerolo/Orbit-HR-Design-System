@@ -15,7 +15,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Badge, Button } from "@material-tailwind/react";
+
+export function BadgeDefault() {
+  return (
+    <Badge content="5">
+      <Button>Notifications</Button>
+    </Badge>
+  );
+}`,
+      },
+    },
+  },
+};
 export const Colors: Story = { render: () => <BadgeColors /> };
 export const Placement: Story = { render: () => <BadgePlacement /> };
 export const Overlap: Story = { render: () => <BadgeOverlap /> };

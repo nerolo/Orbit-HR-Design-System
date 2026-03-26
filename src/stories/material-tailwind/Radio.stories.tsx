@@ -15,7 +15,24 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Radio } from "@material-tailwind/react";
+
+export function RadioDefault() {
+  return (
+    <div className="flex gap-10">
+      <Radio name="type" label="HTML" />
+      <Radio name="type" label="React" defaultChecked />
+    </div>
+  );
+}`,
+      },
+    },
+  },
+};
 export const Colors: Story = { render: () => <RadioColors /> };
 export const CustomIcon: Story = { render: () => <RadioCustomIcon /> };
 export const RippleEffect: Story = { render: () => <RadioRippleEffect /> };

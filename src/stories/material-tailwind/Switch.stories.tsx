@@ -15,7 +15,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Switch } from "@material-tailwind/react";
+
+export function SwitchDefault() {
+  return <Switch />;
+}`,
+      },
+    },
+  },
+};
 export const Checked: Story = { render: () => <CheckedSwitch /> };
 export const Colors: Story = { render: () => <SwitchColors /> };
 export const Label: Story = { render: () => <SwitchLabel /> };

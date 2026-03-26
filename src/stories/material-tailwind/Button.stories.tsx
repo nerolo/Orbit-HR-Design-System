@@ -15,7 +15,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Button } from "@material-tailwind/react";
+
+export function ButtonDefault() {
+  return <Button>Button</Button>;
+}`,
+      },
+    },
+  },
+};
 export const Variants: Story = { render: () => <ButtonVariants /> };
 export const Sizes: Story = { render: () => <ButtonSizes /> };
 export const Colors: Story = { render: () => <ButtonColors /> };

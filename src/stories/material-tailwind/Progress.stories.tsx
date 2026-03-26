@@ -15,7 +15,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Progress } from "@material-tailwind/react";
+
+export function ProgressDefault() {
+  return <Progress value={50} />;
+}`,
+      },
+    },
+  },
+};
 export const Variants: Story = { render: () => <ProgressVariants /> };
 export const Sizes: Story = { render: () => <ProgressSizes /> };
 export const Colors: Story = { render: () => <ProgressColors /> };

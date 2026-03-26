@@ -12,6 +12,21 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `export function VideoDefault() {
+  return (
+    <video className="h-full w-full rounded-lg" controls>
+      <source src="https://docs.material-tailwind.com/demo.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  );
+}`,
+      },
+    },
+  },
+};
 export const Autoplay: Story = { render: () => <AutoplayVideo /> };
 export const Muted: Story = { render: () => <MutedVideo /> };

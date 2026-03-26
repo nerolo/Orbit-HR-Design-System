@@ -15,7 +15,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Textarea } from "@material-tailwind/react";
+
+export function TextareaDefault() {
+  return (
+    <div className="w-96">
+      <Textarea label="Message" />
+    </div>
+  );
+}`,
+      },
+    },
+  },
+};
 export const Variants: Story = { render: () => <TextareaVariants /> };
 export const Sizes: Story = { render: () => <TextareaSizes /> };
 export const Colors: Story = { render: () => <TextareaColors /> };

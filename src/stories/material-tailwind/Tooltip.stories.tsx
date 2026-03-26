@@ -15,7 +15,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Tooltip, Button } from "@material-tailwind/react";
+
+export function TooltipDefault() {
+  return (
+    <Tooltip content="Material Tailwind">
+      <Button>Show Tooltip</Button>
+    </Tooltip>
+  );
+}`,
+      },
+    },
+  },
+};
 export const Placement: Story = { render: () => <TooltipPlacement /> };
 export const CustomAnimation: Story = { render: () => <TooltipCustomAnimation /> };
 export const WithHelperIcon: Story = { render: () => <TooltipWithHelperIcon /> };

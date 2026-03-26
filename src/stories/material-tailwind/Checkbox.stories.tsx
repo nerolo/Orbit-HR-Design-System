@@ -16,7 +16,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Checkbox } from "@material-tailwind/react";
+
+export function CheckboxDefault() {
+  return <Checkbox defaultChecked />;
+}`,
+      },
+    },
+  },
+};
 export const Colors: Story = { render: () => <CheckboxColors /> };
 export const Label: Story = { render: () => <CheckboxLabel /> };
 export const CustomIcon: Story = { render: () => <CheckboxCustomIcon /> };

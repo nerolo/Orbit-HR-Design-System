@@ -15,7 +15,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: `import { Rating } from "@material-tailwind/react";
+
+export function DefaultRating() {
+  return <Rating value={4} />;
+}`,
+      },
+    },
+  },
+};
 export const Colors: Story = { render: () => <RatingColors /> };
 export const Readonly: Story = { render: () => <ReadonlyRating /> };
 export const CustomIcon: Story = { render: () => <CustomRatingIcon /> };
