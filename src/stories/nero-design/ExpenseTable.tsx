@@ -257,16 +257,16 @@ export function ExpenseTable({
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => onDeleteRow?.(row.id)}
-                      className="flex items-center justify-center w-8 h-8 rounded-[8px] bg-white border border-[#e0e0e0] text-[#9e9e9e] hover:bg-[#f1528b] hover:border-[#f1528b] hover:text-white transition-colors"
-                      style={{ boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.06)' }}
+                      className="flex items-center justify-center w-8 h-8 rounded-full bg-[#f5f5f5] text-[#212121] hover:bg-[#f1528b] hover:text-white transition-colors"
+                      style={{ boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.1)' }}
                       title="Delete row"
                     >
                       <TrashIcon />
                     </button>
                     <button
                       onClick={() => onCopyRow?.(row.id)}
-                      className="flex items-center justify-center w-8 h-8 rounded-[8px] bg-white border border-[#e0e0e0] text-[#9e9e9e] hover:bg-[#f1528b] hover:border-[#f1528b] hover:text-white transition-colors"
-                      style={{ boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.06)' }}
+                      className="flex items-center justify-center w-8 h-8 rounded-full bg-[#f5f5f5] text-[#212121] hover:bg-[#f1528b] hover:text-white transition-colors"
+                      style={{ boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.1)' }}
                       title="Duplicate row"
                     >
                       <CopyIcon />
