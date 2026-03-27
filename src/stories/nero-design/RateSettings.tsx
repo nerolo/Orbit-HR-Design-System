@@ -188,18 +188,45 @@ function RateTable() {
                   color: r.source === 'Netsuite' ? T.primary : T.textSecond,
                 }}>{r.source}</span>
               </td>
-              <td style={{ padding: '14px 16px', textAlign: 'right' }}>
-                <button style={{
-                  background: 'none',
-                  border: `1px solid ${T.border}`,
-                  borderRadius: 6,
-                  padding: '4px 10px',
-                  fontSize: 11,
-                  fontWeight: 500,
-                  color: T.textSecond,
-                  cursor: 'pointer',
-                  fontFamily: T.font,
-                }}>Edit</button>
+              <td style={{ padding: '14px 16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  {/* Trash / delete */}
+                  <button style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    width: 32, height: 32, borderRadius: '50%',
+                    background: '#F5F5F5', border: 'none', cursor: 'pointer',
+                    color: '#212121',
+                    boxShadow: '0px 1px 3px rgba(0,0,0,0.1), 0px 1px 2px rgba(0,0,0,0.1)',
+                    transition: 'background 0.15s, color 0.15s',
+                  }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#F1528B'; (e.currentTarget as HTMLButtonElement).style.color = '#fff'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#F5F5F5'; (e.currentTarget as HTMLButtonElement).style.color = '#212121'; }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="3 6 5 6 21 6" />
+                      <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                      <path d="M10 11v6M14 11v6" />
+                      <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+                    </svg>
+                  </button>
+                  {/* Copy / duplicate */}
+                  <button style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    width: 32, height: 32, borderRadius: '50%',
+                    background: '#F5F5F5', border: 'none', cursor: 'pointer',
+                    color: '#212121',
+                    boxShadow: '0px 1px 3px rgba(0,0,0,0.1), 0px 1px 2px rgba(0,0,0,0.1)',
+                    transition: 'background 0.15s, color 0.15s',
+                  }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#F1528B'; (e.currentTarget as HTMLButtonElement).style.color = '#fff'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#F5F5F5'; (e.currentTarget as HTMLButtonElement).style.color = '#212121'; }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" />
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
