@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ClaimSummaryBar, ClaimSummaryBarOnBackground } from './ClaimSummaryBar';
 
 const meta = {
-  title: 'Nero design/Claim Summary Bar',
+  title: 'Expenses module/Claim Summary Bar',
   component: ClaimSummaryBar,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],

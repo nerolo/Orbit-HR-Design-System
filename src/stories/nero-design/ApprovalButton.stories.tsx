@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ApprovalButton, ApprovalButtonAllStates } from './ApprovalButton';
 
 const meta = {
-  title: 'Nero design/Approval Button',
+  title: 'Expenses module/Approval Button',
   component: ApprovalButton,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

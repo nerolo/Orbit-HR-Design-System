@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RejectDialog, RejectDialogOnBackground } from './RejectDialog';
 
 const meta = {
-  title: 'Nero design/Reject Dialog',
+  title: 'Expenses module/Reject Dialog',
   component: RejectDialog,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

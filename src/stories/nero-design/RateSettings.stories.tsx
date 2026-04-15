@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RateSettings, RateSettingsPage } from './RateSettings';
 
 const meta = {
-  title: 'Nero design/Rate Settings',
+  title: 'Expenses module/Rate Settings',
   component: RateSettings,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],

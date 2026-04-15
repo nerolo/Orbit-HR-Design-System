@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function CheckIcon({ color = '#bdbdbd' }: { color?: string }) {
   return (
@@ -32,51 +32,121 @@ export function ApprovalButton({
   onApprove,
   onReturn,
 }: ApprovalButtonProps) {
+  const [isGroupHovered, setIsGroupHovered] = useState(false);
   const isMini = size === 'mini';
-  const btnSize = isMini ? 'w-[62px] h-[36px]' : 'w-[62px] h-[100px]';
-  const gap = isMini ? 'gap-[4px]' : 'gap-[8px]';
-  const padding = isMini ? 'p-[8px]' : 'p-[12px]';
-
-  const approveHighlight = status === 'approved'
-    ? 'bg-[#f1f8e9] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]'
-    : 'bg-[#fafafa] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]';
-
-  const returnHighlight = status === 'returned'
-    ? 'bg-[#fff8e1] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]'
-    : 'bg-[#fafafa] shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]';
 
   const approveColor = status === 'approved' ? '#aed581' : '#bdbdbd';
-  const returnColor = status === 'returned' ? '#ffb300' : '#bdbdbd';
+  const returnColor  = status === 'returned'  ? '#ffb300' : '#bdbdbd';
+
+  // Container styles — neumorphic inset on hover
+  const containerStyle: React.CSSProperties = {
+    fontFamily: 'Hanken Grotesk, sans-serif',
+    backgroundColor: isGroupHovered ? '#f4f2f1' : 'transparent',
+    boxShadow: isGroupHovered
+      ? 'inset 1px 1px 5px 0px #c5c5c5, inset -1px -1px 5px 0px white'
+      : 'none',
+    transition: 'background-color 0.15s ease, box-shadow 0.15s ease',
+  };
+
+  // Per-button styles — neumorphic raised on group hover
+  const getBtnStyle = (activeBg: string): React.CSSProperties => ({
+    backgroundColor: activeBg,
+    boxShadow: isGroupHovered
+      ? '2px 2px 5px 0px #d1d1d1, -1px -1px 2px 0px white'
+      : '0px 1px 2px 0px rgba(0,0,0,0.05)',
+    transition: 'box-shadow 0.15s ease',
+  });
+
+  if (isMini) {
+    return (
+      <div
+        className="inline-flex items-center gap-[4px] p-[8px] rounded-[4px]"
+        style={containerStyle}
+        onMouseEnter={() => setIsGroupHovered(true)}
+        onMouseLeave={() => setIsGroupHovered(false)}
+      >
+        {/* Approve mini */}
+        <button
+          onClick={onApprove}
+          className="w-[62px] h-[36px] flex items-center justify-between px-[12px] py-[16px] rounded-[2px] cursor-pointer"
+          style={getBtnStyle('#f8f8f8')}
+        >
+          <div
+            className="w-[2px] h-[2px] rounded-[1.2px]"
+            style={{
+              backgroundColor: status === 'approved' ? '#aed581' : '#e57373',
+              boxShadow: status === 'approved'
+                ? '0px 0px 3px 0px #62ff00'
+                : '0px 0px 3px 0px #ff5c00',
+            }}
+          />
+          <CheckIcon color={approveColor} />
+        </button>
+
+        {/* Return mini */}
+        <button
+          onClick={onReturn}
+          className="w-[62px] h-[36px] flex items-center justify-between px-[12px] py-[16px] rounded-[2px] cursor-pointer"
+          style={getBtnStyle('#f8f8f8')}
+        >
+          <div
+            className="w-[2px] h-[2px] rounded-[1.2px]"
+            style={{
+              backgroundColor: '#e57373',
+              boxShadow: '0px 0px 3px 0px #ff5c00',
+            }}
+          />
+          <ReturnIcon color={returnColor} />
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className={`inline-flex items-center ${gap} ${padding} rounded-[4px]`}
-      style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
-      {/* Approve button */}
-      <button
-        onClick={onApprove}
-        className={`${btnSize} ${approveHighlight} flex flex-col items-center justify-center rounded-[2px] cursor-pointer transition-all`}
-      >
-        {status === 'approved' && (
-          <div className="w-[4px] h-[4px] rounded-full bg-[#aed581] shadow-[0px_0px_4px_0px_#62ff00] mb-1" />
-        )}
-        <CheckIcon color={approveColor} />
-        {!isMini && (
-          <span className="text-[9px] font-medium mt-1 text-[#bdbdbd] uppercase tracking-wide">Approve</span>
-        )}
-      </button>
-
+    <div
+      className="inline-flex items-center gap-[8px] p-[12px] rounded-[4px]"
+      style={containerStyle}
+      onMouseEnter={() => setIsGroupHovered(true)}
+      onMouseLeave={() => setIsGroupHovered(false)}
+    >
       {/* Return button */}
       <button
         onClick={onReturn}
-        className={`${btnSize} ${returnHighlight} flex flex-col items-center justify-center rounded-[2px] cursor-pointer transition-all`}
+        className="w-[62px] h-[100px] flex flex-col items-center justify-between px-[4px] py-[16px] rounded-[2px] cursor-pointer"
+        style={getBtnStyle(status === 'returned' ? '#fff8e1' : '#fafafa')}
       >
-        {status === 'returned' && (
-          <div className="w-[4px] h-[4px] rounded-full bg-[#ffb300] shadow-[0px_0px_4px_0px_#ffb300] mb-1" />
-        )}
+        <div
+          className="w-[2px] h-[2px] rounded-[1.2px]"
+          style={{
+            backgroundColor: status === 'returned' ? '#ffb300' : '#bdbdbd',
+            boxShadow: status === 'returned' ? '0px 0px 3px 0px #ffb300' : 'none',
+          }}
+        />
         <ReturnIcon color={returnColor} />
-        {!isMini && (
-          <span className="text-[9px] font-medium mt-1 text-[#bdbdbd] uppercase tracking-wide">Return</span>
-        )}
+        <span className="text-[9px] font-medium uppercase tracking-[0.5px]" style={{ color: returnColor }}>
+          Return
+        </span>
+      </button>
+
+      {/* Approve button */}
+      <button
+        onClick={onApprove}
+        className="w-[62px] h-[100px] flex flex-col items-center justify-between px-[4px] py-[16px] rounded-[2px] cursor-pointer"
+        style={getBtnStyle(status === 'approved' ? '#f1f8e9' : '#fafafa')}
+      >
+        <div
+          className="w-[2px] h-[2px] rounded-[1.2px]"
+          style={{
+            backgroundColor: status === 'approved' ? '#aed581' : '#bdbdbd',
+            boxShadow: status === 'approved'
+              ? '0px 0px 4px 0px #62ff00'
+              : 'none',
+          }}
+        />
+        <CheckIcon color={approveColor} />
+        <span className="text-[9px] font-medium uppercase tracking-[0.5px]" style={{ color: approveColor }}>
+          Approve
+        </span>
       </button>
     </div>
   );
@@ -86,7 +156,7 @@ export function ApprovalButtonAllStates() {
   return (
     <div className="flex flex-col gap-6 p-6" style={{ fontFamily: 'Hanken Grotesk, sans-serif' }}>
       <div>
-        <p className="text-[11px] text-[#78909c] mb-3 uppercase tracking-wide">Default</p>
+        <p className="text-[11px] text-[#78909c] mb-3 uppercase tracking-wide">Default (hover over it)</p>
         <ApprovalButton status="default" />
       </div>
       <div>

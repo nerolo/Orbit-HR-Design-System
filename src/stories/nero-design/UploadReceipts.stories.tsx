@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { UploadReceipts, UploadReceiptsOnBackground } from './UploadReceipts';
 
 const meta = {
-  title: 'Nero design/Upload Receipts',
+  title: 'Expenses module/Upload Receipts',
   component: UploadReceipts,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
