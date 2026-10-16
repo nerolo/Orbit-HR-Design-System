@@ -18,6 +18,10 @@ export interface FontWeight {
 export const fontFamily = 'Hanken Grotesk';
 export const fontFamilyStack = "'Hanken Grotesk', system-ui, -apple-system, sans-serif";
 
+// Space Mono — used for uppercase labels (buttons, tabs, column headers, filter chips)
+export const fontFamilyMono = 'Space Mono';
+export const fontFamilyMonoStack = "'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace";
+
 // Type scale — extracted from Figma text styles
 export const typeScale: TypeStep[] = [
   { name: 'text-xs',   token: '--font-size-xs',   size: 10.5, lineHeight: 18, rem: '0.656rem', description: 'Caption, fine print' },

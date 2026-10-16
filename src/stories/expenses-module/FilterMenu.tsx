@@ -274,7 +274,7 @@ export function FilterMenu({
                    gap: 8, paddingLeft: 16, paddingRight: 16, paddingTop: 8, paddingBottom: 8,
                    borderRadius: 8, width: 168, overflow: 'hidden', cursor: 'pointer', flexShrink: 0 }}
         >
-          <p style={{ fontSize: 12, fontWeight: 700, lineHeight: '18px', color: '#757575',
+          <p style={{ fontFamily: 'Space Mono, monospace', fontSize: 12, fontWeight: 700, lineHeight: '18px', color: '#757575',
                       textTransform: 'uppercase', margin: 0 }}>From</p>
           <p style={{ fontSize: 16, fontWeight: 400, lineHeight: '21px', color: '#2d2a2b', margin: 0 }}>
             {fromDate ? fmt(fromDate) : '—'}
@@ -290,7 +290,7 @@ export function FilterMenu({
         <div style={{ backgroundColor: '#f8e9ed', display: 'flex', flexDirection: 'column',
                       gap: 8, paddingLeft: 16, paddingRight: 16, paddingTop: 8, paddingBottom: 8,
                       borderRadius: 8, width: 168, overflow: 'hidden', flexShrink: 0 }}>
-          <p style={{ fontSize: 12, fontWeight: 700, lineHeight: '18px', color: '#757575',
+          <p style={{ fontFamily: 'Space Mono, monospace', fontSize: 12, fontWeight: 700, lineHeight: '18px', color: '#757575',
                       textTransform: 'uppercase', margin: 0 }}>To</p>
           <p style={{ fontSize: 16, fontWeight: 400, lineHeight: '21px', color: '#2d2a2b', margin: 0 }}>
             {toDate ? fmt(toDate) : '—'}

@@ -181,7 +181,7 @@ export function ClaimRequestListingTable({
               </div>
             </th>
             <th className="px-4 py-2 text-left">
-              <div className="flex items-center gap-1 text-[12px] font-bold text-[#607d8b] uppercase">
+              <div className="flex items-center gap-1 text-[12px] font-bold text-[#607d8b] uppercase" style={{ fontFamily: 'Space Mono, monospace' }}>
                 Created Date
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#607d8b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
                   <path d="M8 9l4-4 4 4M16 15l-4 4-4-4" />
