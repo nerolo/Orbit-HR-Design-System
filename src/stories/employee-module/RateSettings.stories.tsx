@@ -1,9 +1,8 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { RateSettings, RateSettingsPage } from './RateSettings';
+import { RateSettings } from './RateSettings';
 
 const meta = {
-  title: 'Expenses module/Rate Settings',
+  title: 'Employee module/Account Sync Menu',
   component: RateSettings,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],
@@ -26,7 +25,3 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 export const NetsuiteTab: Story = { args: { activeTab: 'netsuite' } };
-export const FullPage: Story = {
-  parameters: { layout: 'fullscreen' },
-  render: () => <RateSettingsPage />,
-};

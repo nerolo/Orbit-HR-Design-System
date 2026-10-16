@@ -32,26 +32,24 @@ export function ApprovalButton({
   onApprove,
   onReturn,
 }: ApprovalButtonProps) {
-  const [isGroupHovered, setIsGroupHovered] = useState(false);
+  const [isApproveHovered, setIsApproveHovered] = useState(false);
+  const [isReturnHovered, setIsReturnHovered]   = useState(false);
   const isMini = size === 'mini';
 
   const approveColor = status === 'approved' ? '#aed581' : '#bdbdbd';
   const returnColor  = status === 'returned'  ? '#ffb300' : '#bdbdbd';
 
-  // Container styles — neumorphic inset on hover
+  // Container styles — no background on hover
   const containerStyle: React.CSSProperties = {
     fontFamily: 'Hanken Grotesk, sans-serif',
-    backgroundColor: isGroupHovered ? '#f4f2f1' : 'transparent',
-    boxShadow: isGroupHovered
-      ? 'inset 1px 1px 5px 0px #c5c5c5, inset -1px -1px 5px 0px white'
-      : 'none',
-    transition: 'background-color 0.15s ease, box-shadow 0.15s ease',
+    backgroundColor: 'transparent',
+    transition: 'box-shadow 0.15s ease',
   };
 
-  // Per-button styles — neumorphic raised on group hover
-  const getBtnStyle = (activeBg: string): React.CSSProperties => ({
+  // Per-button styles — neumorphic raised on individual hover
+  const getBtnStyle = (activeBg: string, isHovered: boolean): React.CSSProperties => ({
     backgroundColor: activeBg,
-    boxShadow: isGroupHovered
+    boxShadow: isHovered
       ? '2px 2px 5px 0px #d1d1d1, -1px -1px 2px 0px white'
       : '0px 1px 2px 0px rgba(0,0,0,0.05)',
     transition: 'box-shadow 0.15s ease',
@@ -62,14 +60,14 @@ export function ApprovalButton({
       <div
         className="inline-flex items-center gap-[4px] p-[8px] rounded-[4px]"
         style={containerStyle}
-        onMouseEnter={() => setIsGroupHovered(true)}
-        onMouseLeave={() => setIsGroupHovered(false)}
       >
         {/* Approve mini */}
         <button
           onClick={onApprove}
           className="w-[62px] h-[36px] flex items-center justify-between px-[12px] py-[16px] rounded-[2px] cursor-pointer"
-          style={getBtnStyle('#f8f8f8')}
+          style={getBtnStyle('#f8f8f8', isApproveHovered)}
+          onMouseEnter={() => setIsApproveHovered(true)}
+          onMouseLeave={() => setIsApproveHovered(false)}
         >
           <div
             className="w-[2px] h-[2px] rounded-[1.2px]"
@@ -87,7 +85,9 @@ export function ApprovalButton({
         <button
           onClick={onReturn}
           className="w-[62px] h-[36px] flex items-center justify-between px-[12px] py-[16px] rounded-[2px] cursor-pointer"
-          style={getBtnStyle('#f8f8f8')}
+          style={getBtnStyle('#f8f8f8', isReturnHovered)}
+          onMouseEnter={() => setIsReturnHovered(true)}
+          onMouseLeave={() => setIsReturnHovered(false)}
         >
           <div
             className="w-[2px] h-[2px] rounded-[1.2px]"
@@ -106,14 +106,14 @@ export function ApprovalButton({
     <div
       className="inline-flex items-center gap-[8px] p-[12px] rounded-[4px]"
       style={containerStyle}
-      onMouseEnter={() => setIsGroupHovered(true)}
-      onMouseLeave={() => setIsGroupHovered(false)}
     >
       {/* Return button */}
       <button
         onClick={onReturn}
         className="w-[62px] h-[100px] flex flex-col items-center justify-between px-[4px] py-[16px] rounded-[2px] cursor-pointer"
-        style={getBtnStyle(status === 'returned' ? '#fff8e1' : '#fafafa')}
+        style={getBtnStyle(status === 'returned' ? '#fff8e1' : '#fafafa', isReturnHovered)}
+        onMouseEnter={() => setIsReturnHovered(true)}
+        onMouseLeave={() => setIsReturnHovered(false)}
       >
         <div
           className="w-[2px] h-[2px] rounded-[1.2px]"
@@ -132,7 +132,9 @@ export function ApprovalButton({
       <button
         onClick={onApprove}
         className="w-[62px] h-[100px] flex flex-col items-center justify-between px-[4px] py-[16px] rounded-[2px] cursor-pointer"
-        style={getBtnStyle(status === 'approved' ? '#f1f8e9' : '#fafafa')}
+        style={getBtnStyle(status === 'approved' ? '#f1f8e9' : '#fafafa', isApproveHovered)}
+        onMouseEnter={() => setIsApproveHovered(true)}
+        onMouseLeave={() => setIsApproveHovered(false)}
       >
         <div
           className="w-[2px] h-[2px] rounded-[1.2px]"

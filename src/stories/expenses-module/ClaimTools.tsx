@@ -93,7 +93,7 @@ export function ClaimTools({ currentStep = 'Manager', onRates, onRules }: ClaimT
           style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.1)' }}
         >
           <CurrencyDollarIcon />
-          <span className="text-[11.5px] font-normal text-[#625f64] tracking-wide">RATES</span>
+          <span className="text-[11.5px] font-normal text-[#625f64] tracking-wide" style={{ fontFamily: 'Space Mono, monospace' }}>RATES</span>
         </button>
 
         <button
@@ -102,7 +102,7 @@ export function ClaimTools({ currentStep = 'Manager', onRates, onRules }: ClaimT
           style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.1)' }}
         >
           <DocumentTextIcon />
-          <span className="text-[11.5px] font-normal text-[#625f64] tracking-wide">RULES</span>
+          <span className="text-[11.5px] font-normal text-[#625f64] tracking-wide" style={{ fontFamily: 'Space Mono, monospace' }}>RULES</span>
         </button>
       </div>
 

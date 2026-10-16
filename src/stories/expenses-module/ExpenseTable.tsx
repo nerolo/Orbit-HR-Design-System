@@ -1,5 +1,6 @@
 import React from 'react';
-import { ApprovalButton, ApprovalStatus } from './ApprovalButton';
+import { ApprovalButton } from './ApprovalButton';
+import type { ApprovalStatus } from './ApprovalButton';
 
 export type ReceiptStatus = 'Approved' | 'Rejected' | 'Return' | 'Pending';
 

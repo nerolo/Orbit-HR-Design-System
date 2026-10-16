@@ -49,7 +49,7 @@ export function UploadReceipts({ count = 14, onChooseFiles }: UploadReceiptsProp
         <button
           onClick={onChooseFiles}
           className="flex items-center gap-3 h-9 px-3 bg-[#f5f5f5] border border-[#efebe7] rounded-[6px] text-[14px] font-medium text-[#212121] w-fit"
-          style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)' }}
+          style={{ boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.05)', fontFamily: 'Space Mono, monospace' }}
         >
           <PaperclipIcon />
           Choose Files

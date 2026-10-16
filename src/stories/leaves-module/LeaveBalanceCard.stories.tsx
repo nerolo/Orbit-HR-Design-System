@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { LeaveBalanceCard, LeaveBalanceCardOnBackground } from './LeaveBalanceCard';
 
 const meta = {
-  title: 'Nero design/Leave Balance Card',
+  title: 'Leaves module/Leave Balance Card',
   component: LeaveBalanceCard,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

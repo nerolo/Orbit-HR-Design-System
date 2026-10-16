@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AlertDefault, AlertDismissed } from './Alert';
 
 const meta = {
-  title: 'Nero design/Alert',
+  title: 'Common/Alert',
   component: AlertDefault,
   parameters: { layout: 'padded' },
   tags: ['autodocs'],

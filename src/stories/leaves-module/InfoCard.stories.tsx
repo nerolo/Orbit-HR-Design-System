@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InfoCardSingle, InfoCardTwoSlot, InfoCardHorizontal, InfoCardAllVariants } from './InfoCard';
 
 const meta = {
-  title: 'Nero design/Info Card',
+  title: 'Leaves module/Info Card',
   component: InfoCardSingle,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

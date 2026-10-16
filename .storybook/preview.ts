@@ -6,7 +6,7 @@ const preview: Preview = {
   parameters: {
     options: {
       storySort: {
-        order: ['Nero design', 'Material Tailwind', '*'],
+        order: ['Foundation', 'Common', '*', 'Employee module', 'Leaves module', 'Expenses module', 'Material Tailwind'],
       },
     },
     layout: 'fullscreen',

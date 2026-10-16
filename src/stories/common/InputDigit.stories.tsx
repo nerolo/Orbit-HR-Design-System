@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InputDigitDefault, InputDigitActive, InputDigitOTPRow, InputDigitAllStates } from './InputDigit';
 
 const meta = {
-  title: 'Nero design/Input Digit',
+  title: 'Common/Input Digit',
   component: InputDigitDefault,
   parameters: { layout: 'centered' },
   tags: ['autodocs'],

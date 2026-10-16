@@ -48,13 +48,14 @@ export function RejectDialog({
         <button
           onClick={onCancel}
           className="text-[10.5px] font-bold text-[#263238] uppercase tracking-wide bg-transparent"
+          style={{ fontFamily: 'Space Mono, monospace' }}
         >
           cancel
         </button>
         <button
           onClick={() => onReject?.(reason)}
           className="h-10 px-4 bg-[#f1528b] text-white text-[10.5px] font-bold uppercase rounded-[8px]"
-          style={{ boxShadow: '0px 4px 6px -1px rgba(244,67,54,0.2), 0px 2px 4px -2px rgba(244,67,54,0.2)' }}
+          style={{ boxShadow: '0px 4px 6px -1px rgba(244,67,54,0.2), 0px 2px 4px -2px rgba(244,67,54,0.2)', fontFamily: 'Space Mono, monospace' }}
         >
           Reject
         </button>
